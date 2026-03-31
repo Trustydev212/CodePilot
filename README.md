@@ -17,19 +17,19 @@ Most Claude Code toolkits are collections of generic prompts. CodePilot is diffe
 
 ### Option 1: One-line install
 ```bash
-curl -fsSL https://raw.githubusercontent.com/trustydev212/codepilot/main/setup.sh | bash
+curl -fsSL https://raw.githubusercontent.com/Trustydev212/CodePilot/main/setup.sh | bash
 ```
 
 ### Option 2: Manual copy
 ```bash
-git clone https://github.com/trustydev212/codepilot.git
-cp -r codepilot/.claude /path/to/your/project/
-cp codepilot/CLAUDE.md /path/to/your/project/
+git clone https://github.com/Trustydev212/CodePilot.git
+cp -r CodePilot/.claude /path/to/your/project/
+cp CodePilot/CLAUDE.md /path/to/your/project/
 ```
 
 ### Option 3: Git submodule (auto-update)
 ```bash
-git submodule add https://github.com/trustydev212/codepilot.git .codepilot
+git submodule add https://github.com/Trustydev212/CodePilot.git .codepilot
 cp -r .codepilot/.claude .claude/
 cp .codepilot/CLAUDE.md CLAUDE.md
 ```
@@ -127,111 +127,6 @@ cp .codepilot/CLAUDE.md CLAUDE.md
 | **testing** | All test files |
 | **api** | All API/route files |
 | **git** | All files (commit practices) |
-
-## Project Structure
-
-```
-.claude/
-├── settings.json                    # Permissions, hooks config
-├── skills/
-│   ├── workflow/                     # Slash commands (53+)
-│   │   ├── feature/SKILL.md         # /feature
-│   │   ├── fix/SKILL.md             # /fix
-│   │   ├── plan/SKILL.md            # /plan
-│   │   ├── ship/SKILL.md            # /ship
-│   │   ├── review/SKILL.md          # /review
-│   │   ├── deploy/SKILL.md          # /deploy
-│   │   ├── api/SKILL.md             # /api
-│   │   ├── commit/SKILL.md          # /commit
-│   │   ├── pr/SKILL.md              # /pr
-│   │   ├── migrate/SKILL.md         # /migrate
-│   │   ├── scaffold/SKILL.md        # /scaffold
-│   │   ├── docs/SKILL.md            # /docs
-│   │   ├── changelog/SKILL.md       # /changelog
-│   │   ├── env/SKILL.md             # /env
-│   │   ├── seed/SKILL.md            # /seed
-│   │   ├── monitor/SKILL.md         # /monitor
-│   │   ├── batch/SKILL.md           # /batch
-│   │   ├── loop/SKILL.md            # /loop
-│   │   ├── issue/SKILL.md           # /issue
-│   │   ├── perf/SKILL.md            # /perf
-│   │   ├── security/SKILL.md        # /security
-│   │   ├── a11y/SKILL.md            # /a11y
-│   │   ├── i18n/SKILL.md            # /i18n
-│   │   ├── storybook/SKILL.md       # /storybook
-│   │   ├── db-migrate/SKILL.md      # /db-migrate
-│   │   ├── upgrade/SKILL.md         # /upgrade
-│   │   ├── ui/SKILL.md              # /ui
-│   │   ├── design-system/SKILL.md   # /design-system
-│   │   ├── screenshot-to-code/SKILL.md # /screenshot-to-code
-│   │   ├── saas-auth/SKILL.md       # /saas-auth
-│   │   ├── payment/SKILL.md         # /payment
-│   │   ├── money-safe/SKILL.md      # /money-safe
-│   │   ├── queue/SKILL.md           # /queue
-│   │   ├── realtime/SKILL.md        # /realtime
-│   │   ├── email/SKILL.md           # /email
-│   │   ├── storage/SKILL.md         # /storage
-│   │   ├── cache/SKILL.md           # /cache
-│   │   ├── search/SKILL.md          # /search
-│   │   ├── admin/SKILL.md           # /admin
-│   │   ├── analytics/SKILL.md       # /analytics
-│   │   ├── export/SKILL.md          # /export
-│   │   └── process/SKILL.md         # /process
-│   ├── frontend/
-│   │   ├── react-nextjs/SKILL.md    # React 19 + Next.js 15
-│   │   ├── ui-styling/SKILL.md      # Tailwind + shadcn/ui + a11y
-│   │   ├── vue-svelte/SKILL.md      # Vue 3 + Svelte 5
-│   │   └── state-graphql/SKILL.md   # Zustand, TanStack Query, tRPC
-│   ├── backend/
-│   │   ├── api-design/SKILL.md      # RESTful API patterns (auto)
-│   │   ├── database/SKILL.md        # PostgreSQL, Prisma, Drizzle
-│   │   ├── auth/SKILL.md            # Auth & authorization
-│   │   ├── nodejs/SKILL.md          # Node.js/Express/Fastify
-│   │   └── python-backend/SKILL.md  # FastAPI/Django/SQLAlchemy
-│   ├── devops/
-│   │   └── docker-cicd/SKILL.md     # Docker + GitHub Actions
-│   ├── quality/
-│   │   ├── debug/SKILL.md           # /debug
-│   │   ├── test/SKILL.md            # /test
-│   │   ├── audit/SKILL.md           # /audit
-│   │   ├── optimize/SKILL.md        # /optimize
-│   │   └── e2e-testing/SKILL.md     # /e2e (Playwright)
-│   └── core/
-│       ├── refactor/SKILL.md        # /refactor
-│       ├── index/SKILL.md           # /index
-│       ├── checkpoint/SKILL.md      # /checkpoint
-│       ├── common-ground/SKILL.md   # /common-ground
-│       ├── mode/SKILL.md            # /mode
-│       └── learn/SKILL.md           # /learn
-├── hooks/
-│   ├── safety-guard.sh              # 100+ protection patterns (11 categories)
-│   ├── protect-secrets.sh           # Protect sensitive files + symlink detection
-│   ├── quality-gate.sh              # Auto type/syntax check after edits
-│   ├── auto-format.sh              # Auto-format files after edits (Prettier, Black, gofmt)
-│   └── self-test.sh                 # Hook verification tests (17 checks)
-├── rules/
-│   ├── typescript.md                # TypeScript standards
-│   ├── react.md                     # React patterns
-│   ├── testing.md                   # Testing practices
-│   ├── api.md                       # API design rules
-│   └── git.md                       # Git workflow rules
-└── agents/
-    ├── planner.md                   # Architecture planning agent
-    ├── reviewer.md                  # 6-aspect code review agent
-    ├── tester.md                    # Test generation agent
-    ├── debugger.md                  # Root cause analysis agent
-    ├── security-auditor.md          # Security audit agent
-    └── performance-analyzer.md      # Performance profiling agent
-.github/
-├── workflows/
-│   ├── ci.yml                       # CI template (lint, typecheck, test, build)
-│   └── release.yml                  # Release template (changelog, GitHub release)
-CLAUDE.md                            # Project context & philosophy
-.mcp.json.example                    # Recommended MCP server configs
-.claude-plugin/plugin.json           # Plugin manifest
-setup.sh                             # One-line installer
-LICENSE                              # MIT license
-```
 
 ## Design Philosophy
 

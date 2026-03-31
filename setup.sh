@@ -1,6 +1,6 @@
 #!/bin/bash
 # CodePilot - One-line installer
-# Usage: curl -fsSL https://raw.githubusercontent.com/trustydev212/codepilot/main/setup.sh | bash
+# Usage: curl -fsSL https://raw.githubusercontent.com/Trustydev212/CodePilot/main/setup.sh | bash
 
 set -e
 
@@ -13,16 +13,16 @@ NC='\033[0m' # No Color
 
 print_header() {
   echo ""
-  echo -e "${BLUE}╔══════════════════════════════════════╗${NC}"
-  echo -e "${BLUE}║          CodePilot Installer          ║${NC}"
-  echo -e "${BLUE}║   Fullstack Developer Toolkit for     ║${NC}"
-  echo -e "${BLUE}║           Claude Code                 ║${NC}"
-  echo -e "${BLUE}╚══════════════════════════════════════╝${NC}"
+  echo -e "${BLUE}\u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557${NC}"
+  echo -e "${BLUE}\u2551          CodePilot Installer          \u2551${NC}"
+  echo -e "${BLUE}\u2551   Fullstack Developer Toolkit for     \u2551${NC}"
+  echo -e "${BLUE}\u2551           Claude Code                 \u2551${NC}"
+  echo -e "${BLUE}\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d${NC}"
   echo ""
 }
 
 print_step() {
-  echo -e "${GREEN}[✓]${NC} $1"
+  echo -e "${GREEN}[\u2713]${NC} $1"
 }
 
 print_warn() {
@@ -30,12 +30,11 @@ print_warn() {
 }
 
 print_error() {
-  echo -e "${RED}[✗]${NC} $1"
+  echo -e "${RED}[\u2717]${NC} $1"
 }
 
 print_header
 
-# Check prerequisites
 if ! command -v git &>/dev/null; then
   print_error "git is not installed. Please install git first."
   exit 1
@@ -46,7 +45,6 @@ if ! command -v jq &>/dev/null; then
   print_warn "Install: brew install jq (macOS) or apt install jq (Linux)"
 fi
 
-# Determine install location
 INSTALL_DIR="${1:-.}"
 
 if [ "$INSTALL_DIR" = "--global" ] || [ "$INSTALL_DIR" = "-g" ]; then
@@ -60,19 +58,17 @@ else
   echo -e "Installing to ${BLUE}$INSTALL_DIR${NC}"
 fi
 
-# Clone to temp directory
 TEMP_DIR=$(mktemp -d)
 trap "rm -rf $TEMP_DIR" EXIT
 
 echo ""
 echo "Downloading CodePilot..."
-git clone --quiet --depth 1 https://github.com/trustydev212/codepilot.git "$TEMP_DIR" 2>/dev/null || {
+git clone --quiet --depth 1 https://github.com/Trustydev212/CodePilot.git "$TEMP_DIR" 2>/dev/null || {
   print_error "Failed to download CodePilot. Check your internet connection."
   exit 1
 }
 print_step "Downloaded"
 
-# Detect existing .claude directory
 if [ -d "$CLAUDE_DIR" ]; then
   print_warn "Existing .claude directory found"
   echo "  Merging without overwriting your existing files..."
@@ -81,15 +77,12 @@ else
   MERGE=false
 fi
 
-# Copy files
 if [ "$MERGE" = true ]; then
-  # Merge: copy new files, don't overwrite existing
   cp -rn "$TEMP_DIR/.claude/skills" "$CLAUDE_DIR/" 2>/dev/null || true
   cp -rn "$TEMP_DIR/.claude/hooks" "$CLAUDE_DIR/" 2>/dev/null || true
   cp -rn "$TEMP_DIR/.claude/rules" "$CLAUDE_DIR/" 2>/dev/null || true
   cp -rn "$TEMP_DIR/.claude/agents" "$CLAUDE_DIR/" 2>/dev/null || true
 
-  # Only copy settings if none exists
   if [ ! -f "$CLAUDE_DIR/settings.json" ]; then
     cp "$TEMP_DIR/.claude/settings.json" "$CLAUDE_DIR/"
   else
@@ -99,7 +92,6 @@ else
   cp -r "$TEMP_DIR/.claude" "$INSTALL_DIR/"
 fi
 
-# Copy CLAUDE.md only if not exists
 if [ ! -f "$INSTALL_DIR/CLAUDE.md" ]; then
   cp "$TEMP_DIR/CLAUDE.md" "$INSTALL_DIR/"
   print_step "Created CLAUDE.md"
@@ -107,17 +99,14 @@ else
   print_warn "Keeping your existing CLAUDE.md"
 fi
 
-# Copy .mcp.json.example if not exists
 if [ ! -f "$INSTALL_DIR/.mcp.json" ] && [ ! -f "$INSTALL_DIR/.mcp.json.example" ]; then
   cp "$TEMP_DIR/.mcp.json.example" "$INSTALL_DIR/.mcp.json.example"
   print_step "Created .mcp.json.example"
 fi
 
-# Make hooks executable
 chmod +x "$CLAUDE_DIR/hooks/"*.sh 2>/dev/null || true
 print_step "Made hooks executable"
 
-# Stack detection
 echo ""
 echo -e "${BLUE}Detected stack:${NC}"
 
@@ -133,14 +122,12 @@ echo -e "${BLUE}Detected stack:${NC}"
 ([ -f "$INSTALL_DIR/drizzle.config.ts" ] || [ -f "$INSTALL_DIR/drizzle.config.js" ]) && print_step "Drizzle ORM"
 ([ -f "$INSTALL_DIR/docker-compose.yml" ] || [ -f "$INSTALL_DIR/docker-compose.yaml" ]) && print_step "Docker"
 
-# Summary
 echo ""
-echo -e "${GREEN}╔══════════════════════════════════════╗${NC}"
-echo -e "${GREEN}║       CodePilot installed!            ║${NC}"
-echo -e "${GREEN}╚══════════════════════════════════════╝${NC}"
+echo -e "${GREEN}\u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557${NC}"
+echo -e "${GREEN}\u2551       CodePilot installed!            \u2551${NC}"
+echo -e "${GREEN}\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d${NC}"
 echo ""
 
-# Count installed components
 SKILLS=$(find "$CLAUDE_DIR/skills" -name "SKILL.md" 2>/dev/null | wc -l | tr -d ' ')
 AGENTS=$(find "$CLAUDE_DIR/agents" -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
 HOOKS=$(find "$CLAUDE_DIR/hooks" -name "*.sh" 2>/dev/null | wc -l | tr -d ' ')
