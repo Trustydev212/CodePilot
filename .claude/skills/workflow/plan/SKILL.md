@@ -2,6 +2,7 @@
 name: plan
 description: "Architecture planning with trade-off analysis. Produces actionable implementation plan, not vague diagrams."
 user-invocable: true
+context: fork
 allowed-tools: Read, Grep, Glob, Agent, Bash
 ---
 

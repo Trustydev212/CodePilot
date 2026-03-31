@@ -13,9 +13,6 @@ paths:
 
 Build APIs that are consistent, well-documented, and a joy to consume.
 
-## Input
-$ARGUMENTS
-
 ## API Design Principles
 
 1. **Consistent naming**: plural nouns for collections (`/users`, `/orders`)

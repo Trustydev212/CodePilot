@@ -2,6 +2,7 @@
 name: api
 description: "Design and implement API endpoints from spec. Generates route, validation, service, types, and tests in one go."
 user-invocable: true
+context: fork
 allowed-tools: Bash, Read, Write, Edit, Grep, Glob
 ---
 
