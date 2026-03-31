@@ -34,13 +34,17 @@ if echo "$FILE_PATH" | grep -qiE '\.(key|pem|p12|pfx|jks|keystore)$'; then
   exit 2
 fi
 
+if echo "$BASENAME" | grep -qiE '^id_(rsa|dsa|ecdsa|ed25519)'; then
+  echo "BLOCKED: Cannot modify SSH private key ($BASENAME)" >&2
+  exit 2
+fi
+
 if echo "$FILE_PATH" | grep -qiE '(credentials|secrets?|tokens?)\.(json|yaml|yml|xml|conf|cfg)$'; then
   echo "BLOCKED: Cannot modify secret configuration ($BASENAME)" >&2
   exit 2
 fi
 
 # === PROTECTED DIRECTORIES ===
-# Match both relative (.git/) and absolute (/path/.git/) paths
 if echo "$FILE_PATH" | grep -qE '(^|/)\.git/'; then
   echo "BLOCKED: Cannot modify .git internals" >&2
   exit 2
