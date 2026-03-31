@@ -52,17 +52,26 @@ CodePilot auto-detects your project stack from config files:
 - `/pr [details]` - Create structured PR with auto-generated description
 - `/migrate [target]` - Safe dependency upgrade with checkpoint and rollback
 
+### Project Setup
+- `/scaffold <target>` - Generate project structures and feature modules with stack-aware templates
+- `/env` - Validate environment variables, generate .env.example, detect leaked secrets
+- `/seed` - Generate database seed data from Prisma/Drizzle schema
+- `/docs [target]` - Auto-generate API docs, component docs, architecture overviews
+
 ### Utilities
 - `/debug <symptom>` - Systematic root cause analysis
 - `/optimize <target>` - Performance profiling and optimization
 - `/api <spec>` - Design and implement API endpoints
 - `/e2e <scope>` - End-to-end testing with Playwright
+- `/changelog` - Auto-generate changelogs from conventional commits
+- `/monitor` - Set up error tracking, health checks, structured logging
 
 ### Context Engineering
 - `/index` - Map codebase architecture, dependencies, patterns
 - `/checkpoint save|restore|list` - Git checkpoint for safe experimentation
 - `/common-ground` - Surface and validate Claude's assumptions about your project
 - `/mode <name>` - Switch behavioral mode (token-efficient, brainstorm, deep-research, implementation, review, orchestration)
+- `/learn` - Analyze codebase patterns and auto-generate custom Claude rules for your project
 
 ## Quality Gates (Enforced by Hooks)
 

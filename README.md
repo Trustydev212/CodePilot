@@ -56,10 +56,17 @@ cp .codepilot/CLAUDE.md CLAUDE.md
 | `/commit` | Smart conventional commit from staged changes |
 | `/pr [details]` | Create structured PR with auto-generated description |
 | `/migrate [target]` | Safe dependency upgrade with checkpoint and rollback |
+| `/scaffold <target>` | Generate project structures and feature modules |
+| `/docs [target]` | Auto-generate API docs, component docs, architecture |
+| `/changelog` | Auto-generate changelogs from conventional commits |
+| `/env` | Validate env vars, generate .env.example, detect leaks |
+| `/seed` | Generate database seed data from schema |
+| `/monitor` | Set up error tracking, health checks, logging |
 | `/index` | Map codebase architecture, dependencies, patterns |
 | `/checkpoint save\|restore\|list` | Git checkpoints for safe experimentation |
 | `/common-ground` | Surface and validate Claude's assumptions |
 | `/mode <name>` | Switch behavioral mode (token-efficient, brainstorm, etc.) |
+| `/learn` | Analyze codebase patterns, auto-generate custom rules |
 
 ### Expert Skills (Auto-activated)
 
@@ -83,6 +90,7 @@ cp .codepilot/CLAUDE.md CLAUDE.md
 | **safety-guard** | Blocks destructive bash commands (`rm -rf`, force push, insecure chmod) |
 | **protect-secrets** | Prevents editing `.env`, `.key`, `.pem`, credential files |
 | **quality-gate** | Auto-checks types/syntax after every file edit |
+| **auto-format** | Auto-formats files after edits (Prettier, Black, gofmt, rustfmt) |
 
 ### Coding Rules (Path-scoped)
 
@@ -110,7 +118,13 @@ cp .codepilot/CLAUDE.md CLAUDE.md
 │   │   ├── api/SKILL.md             # /api
 │   │   ├── commit/SKILL.md          # /commit
 │   │   ├── pr/SKILL.md              # /pr
-│   │   └── migrate/SKILL.md         # /migrate
+│   │   ├── migrate/SKILL.md         # /migrate
+│   │   ├── scaffold/SKILL.md        # /scaffold
+│   │   ├── docs/SKILL.md            # /docs
+│   │   ├── changelog/SKILL.md       # /changelog
+│   │   ├── env/SKILL.md             # /env
+│   │   ├── seed/SKILL.md            # /seed
+│   │   └── monitor/SKILL.md         # /monitor
 │   ├── frontend/
 │   │   ├── react-nextjs/SKILL.md    # React 19 + Next.js 15
 │   │   ├── ui-styling/SKILL.md      # Tailwind + shadcn/ui + a11y
@@ -135,11 +149,13 @@ cp .codepilot/CLAUDE.md CLAUDE.md
 │       ├── index/SKILL.md           # /index
 │       ├── checkpoint/SKILL.md      # /checkpoint
 │       ├── common-ground/SKILL.md   # /common-ground
-│       └── mode/SKILL.md            # /mode
+│       ├── mode/SKILL.md            # /mode
+│       └── learn/SKILL.md           # /learn
 ├── hooks/
 │   ├── safety-guard.sh              # 100+ protection patterns (11 categories)
 │   ├── protect-secrets.sh           # Protect sensitive files + symlink detection
 │   ├── quality-gate.sh              # Auto type/syntax check after edits
+│   ├── auto-format.sh              # Auto-format files after edits (Prettier, Black, gofmt)
 │   └── self-test.sh                 # Hook verification tests (17 checks)
 ├── rules/
 │   ├── typescript.md                # TypeScript standards
