@@ -89,7 +89,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "echo '[Claudekit] Claude needs your attention' >&2"
+            "command": "echo '[CodePilot] Claude needs your attention' >&2"
           }
         ]
       }

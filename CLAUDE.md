@@ -1,4 +1,4 @@
-# Claudekit - Fullstack Developer Toolkit
+# CodePilot - Fullstack Developer Toolkit
 
 > Production-grade skills, agents, and automation for Claude Code.
 > Every tool solves a real pain point. No fluff.
@@ -13,7 +13,7 @@
 
 ## Stack Detection
 
-Claudekit auto-detects your project stack from config files:
+CodePilot auto-detects your project stack from config files:
 
 | File | Stack Detected |
 |------|---------------|
@@ -46,6 +46,11 @@ Claudekit auto-detects your project stack from config files:
 - `/plan <goal>` - Architecture planning with trade-off analysis
 - `/ship` - Pre-flight checks, build, deploy pipeline
 - `/deploy <target>` - Environment-aware deployment
+
+### Git Workflow
+- `/commit` - Smart conventional commit from staged changes
+- `/pr [details]` - Create structured PR with auto-generated description
+- `/migrate [target]` - Safe dependency upgrade with checkpoint and rollback
 
 ### Utilities
 - `/debug <symptom>` - Systematic root cause analysis

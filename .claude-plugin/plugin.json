@@ -1,0 +1,28 @@
+{
+  "name": "codepilot",
+  "version": "1.0.0",
+  "description": "Production-grade fullstack developer toolkit for Claude Code. Skills, hooks, agents, and automation.",
+  "author": "Trustydev212",
+  "license": "MIT",
+  "homepage": "https://github.com/trustydev212/codepilot",
+  "keywords": [
+    "claude-code",
+    "skills",
+    "fullstack",
+    "developer-tools",
+    "automation",
+    "hooks",
+    "agents"
+  ],
+  "capabilities": {
+    "skills": true,
+    "hooks": true,
+    "rules": true,
+    "agents": true,
+    "mcp": false
+  },
+  "requirements": {
+    "claude-code": ">=2.0.0",
+    "tools": ["jq"]
+  }
+}

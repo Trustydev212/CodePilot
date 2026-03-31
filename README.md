@@ -1,11 +1,11 @@
-# Claudekit
+# CodePilot
 
 **Production-grade skills, hooks, and automation for Claude Code.**
 Build fullstack apps faster. Ship with confidence.
 
 ## What Makes This Different
 
-Most Claude Code toolkits are collections of generic prompts. Claudekit is different:
+Most Claude Code toolkits are collections of generic prompts. CodePilot is different:
 
 - **Evidence-based** — Every workflow verifies completion with real checks (tests pass, types check, lint clean)
 - **Context-aware** — Auto-detects your stack (Next.js, FastAPI, Prisma, etc.) and adapts patterns
@@ -15,19 +15,23 @@ Most Claude Code toolkits are collections of generic prompts. Claudekit is diffe
 
 ## Quick Start
 
-### Option 1: Copy to your project
+### Option 1: One-line install
 ```bash
-# Clone and copy the .claude directory to your project
-git clone https://github.com/trustydev212/claudehub.git
-cp -r claudehub/.claude /path/to/your/project/
-cp claudehub/CLAUDE.md /path/to/your/project/
+curl -fsSL https://raw.githubusercontent.com/trustydev212/codepilot/main/setup.sh | bash
 ```
 
-### Option 2: Git submodule (auto-update)
+### Option 2: Manual copy
 ```bash
-git submodule add https://github.com/trustydev212/claudehub.git .claudekit
-cp -r .claudekit/.claude .claude/
-cp .claudekit/CLAUDE.md CLAUDE.md
+git clone https://github.com/trustydev212/codepilot.git
+cp -r codepilot/.claude /path/to/your/project/
+cp codepilot/CLAUDE.md /path/to/your/project/
+```
+
+### Option 3: Git submodule (auto-update)
+```bash
+git submodule add https://github.com/trustydev212/codepilot.git .codepilot
+cp -r .codepilot/.claude .claude/
+cp .codepilot/CLAUDE.md CLAUDE.md
 ```
 
 ## What's Included
@@ -49,6 +53,9 @@ cp .claudekit/CLAUDE.md CLAUDE.md
 | `/api <spec>` | Design and implement API endpoints |
 | `/e2e <scope>` | End-to-end testing with Playwright |
 | `/deploy <target>` | Environment-aware deployment with health checks |
+| `/commit` | Smart conventional commit from staged changes |
+| `/pr [details]` | Create structured PR with auto-generated description |
+| `/migrate [target]` | Safe dependency upgrade with checkpoint and rollback |
 | `/index` | Map codebase architecture, dependencies, patterns |
 | `/checkpoint save\|restore\|list` | Git checkpoints for safe experimentation |
 | `/common-ground` | Surface and validate Claude's assumptions |
@@ -100,7 +107,10 @@ cp .claudekit/CLAUDE.md CLAUDE.md
 │   │   ├── ship/SKILL.md            # /ship
 │   │   ├── review/SKILL.md          # /review
 │   │   ├── deploy/SKILL.md          # /deploy
-│   │   └── api/SKILL.md             # /api
+│   │   ├── api/SKILL.md             # /api
+│   │   ├── commit/SKILL.md          # /commit
+│   │   ├── pr/SKILL.md              # /pr
+│   │   └── migrate/SKILL.md         # /migrate
 │   ├── frontend/
 │   │   ├── react-nextjs/SKILL.md    # React 19 + Next.js 15
 │   │   ├── ui-styling/SKILL.md      # Tailwind + shadcn/ui + a11y
@@ -129,7 +139,8 @@ cp .claudekit/CLAUDE.md CLAUDE.md
 ├── hooks/
 │   ├── safety-guard.sh              # 100+ protection patterns (11 categories)
 │   ├── protect-secrets.sh           # Protect sensitive files + symlink detection
-│   └── quality-gate.sh              # Auto type/syntax check after edits
+│   ├── quality-gate.sh              # Auto type/syntax check after edits
+│   └── self-test.sh                 # Hook verification tests (17 checks)
 ├── rules/
 │   ├── typescript.md                # TypeScript standards
 │   ├── react.md                     # React patterns
@@ -145,6 +156,9 @@ cp .claudekit/CLAUDE.md CLAUDE.md
     └── performance-analyzer.md      # Performance profiling agent
 CLAUDE.md                            # Project context & philosophy
 .mcp.json.example                    # Recommended MCP server configs
+.claude-plugin/plugin.json           # Plugin manifest
+setup.sh                             # One-line installer
+LICENSE                              # MIT license
 ```
 
 ## Design Philosophy
