@@ -64,6 +64,12 @@ CodePilot auto-detects your project stack from config files:
 - `/issue <number>` - Full issue-to-PR pipeline (read → plan → implement → test → PR)
 - `/upgrade <framework>` - Guided major version upgrades with codemods and migration
 
+### UI & Design
+- `/ui <description>` - Generate UI components from text (v0-style, shadcn-aware)
+- `/design-system` - Create, audit, manage design tokens and theme consistency
+- `/screenshot-to-code <image>` - Convert screenshots/mockups to React/Vue components
+- `/storybook <component>` - Auto-generate Storybook stories from components
+
 ### Utilities
 - `/debug <symptom>` - Systematic root cause analysis
 - `/optimize <target>` - Performance profiling and optimization
@@ -71,7 +77,6 @@ CodePilot auto-detects your project stack from config files:
 - `/security` - Security scanning (deps, secrets, OWASP Top 10, headers)
 - `/a11y` - Accessibility audit and auto-fix (WCAG 2.1 AA)
 - `/i18n <action>` - Internationalization management (extract, sync, check translations)
-- `/storybook <component>` - Auto-generate Storybook stories from components
 - `/db-migrate` - Safe database migration with rollback generation
 - `/api <spec>` - Design and implement API endpoints
 - `/e2e <scope>` - End-to-end testing with Playwright

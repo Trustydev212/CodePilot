@@ -36,7 +36,7 @@ cp .codepilot/CLAUDE.md CLAUDE.md
 
 ## What's Included
 
-### Workflow Commands (37+ Slash Commands)
+### 40+ Workflow Commands (Slash Commands)
 
 | Command | Description |
 |---------|-------------|
@@ -62,11 +62,6 @@ cp .codepilot/CLAUDE.md CLAUDE.md
 | `/env` | Validate env vars, generate .env.example, detect leaks |
 | `/seed` | Generate database seed data from schema |
 | `/monitor` | Set up error tracking, health checks, logging |
-| `/index` | Map codebase architecture, dependencies, patterns |
-| `/checkpoint save\|restore\|list` | Git checkpoints for safe experimentation |
-| `/common-ground` | Surface and validate Claude's assumptions |
-| `/mode <name>` | Switch behavioral mode (token-efficient, brainstorm, etc.) |
-| `/learn` | Analyze codebase patterns, auto-generate custom rules |
 | `/batch <operation>` | Apply changes across multiple files in parallel |
 | `/loop <type>` | Automated fix-verify cycles until all checks pass |
 | `/issue <number>` | Full issue-to-PR pipeline |
@@ -77,6 +72,14 @@ cp .codepilot/CLAUDE.md CLAUDE.md
 | `/storybook <component>` | Auto-generate Storybook stories from components |
 | `/db-migrate` | Safe database migration with rollback generation |
 | `/upgrade <framework>` | Guided major version upgrades with codemods |
+| `/ui <description>` | Generate UI components from text (v0-style) |
+| `/design-system` | Design tokens, theme audit, consistency enforcement |
+| `/screenshot-to-code` | Convert screenshots/mockups to production components |
+| `/index` | Map codebase architecture, dependencies, patterns |
+| `/checkpoint save\|restore\|list` | Git checkpoints for safe experimentation |
+| `/common-ground` | Surface and validate Claude's assumptions |
+| `/mode <name>` | Switch behavioral mode (token-efficient, brainstorm, etc.) |
+| `/learn` | Analyze codebase patterns, auto-generate custom rules |
 
 ### Expert Skills (Auto-activated)
 
@@ -112,91 +115,13 @@ cp .codepilot/CLAUDE.md CLAUDE.md
 | **api** | All API/route files |
 | **git** | All files (commit practices) |
 
-## Project Structure
-
-```
-.claude/
-├── settings.json                    # Permissions, hooks config
-├── skills/
-│   ├── workflow/                     # 26 slash commands
-│   │   ├── feature/SKILL.md         # /feature
-│   │   ├── fix/SKILL.md             # /fix
-│   │   ├── plan/SKILL.md            # /plan
-│   │   ├── ship/SKILL.md            # /ship
-│   │   ├── review/SKILL.md          # /review
-│   │   ├── deploy/SKILL.md          # /deploy
-│   │   ├── api/SKILL.md             # /api
-│   │   ├── commit/SKILL.md          # /commit
-│   │   ├── pr/SKILL.md              # /pr
-│   │   ├── migrate/SKILL.md         # /migrate
-│   │   ├── scaffold/SKILL.md        # /scaffold
-│   │   ├── docs/SKILL.md            # /docs
-│   │   ├── changelog/SKILL.md       # /changelog
-│   │   ├── env/SKILL.md             # /env
-│   │   ├── seed/SKILL.md            # /seed
-│   │   ├── monitor/SKILL.md         # /monitor
-│   │   ├── batch/SKILL.md           # /batch
-│   │   ├── loop/SKILL.md            # /loop
-│   │   ├── issue/SKILL.md           # /issue
-│   │   ├── perf/SKILL.md            # /perf
-│   │   ├── security/SKILL.md        # /security
-│   │   ├── a11y/SKILL.md            # /a11y
-│   │   ├── i18n/SKILL.md            # /i18n
-│   │   ├── storybook/SKILL.md       # /storybook
-│   │   ├── db-migrate/SKILL.md      # /db-migrate
-│   │   └── upgrade/SKILL.md         # /upgrade
-│   ├── frontend/                     # 4 auto-activated skills
-│   ├── backend/                      # 5 auto-activated skills
-│   ├── devops/                       # 1 auto-activated skill
-│   ├── quality/                      # 5 quality skills
-│   └── core/                         # 6 core skills
-├── hooks/
-│   ├── safety-guard.sh              # 100+ protection patterns
-│   ├── protect-secrets.sh           # Protect sensitive files
-│   ├── quality-gate.sh              # Auto type/syntax check
-│   ├── auto-format.sh               # Auto-format after edits
-│   └── self-test.sh                 # Hook verification tests
-├── rules/                            # 5 coding rules
-└── agents/                           # 6 specialized agents
-.github/workflows/
-├── ci.yml                           # CI template
-└── release.yml                      # Release template
-```
-
 ## Design Philosophy
 
-### 1. Evidence Over Claims
-Every workflow runs real quality gates before reporting completion:
-- `tsc --noEmit` for type safety
-- `eslint --max-warnings=0` for lint
-- `npm test` / `pytest` for test suite
-- `npm run build` for build verification
-
-### 2. Fix the Root Cause
-`/fix` uses 5 Whys technique to find the actual cause, not just patch symptoms.
-`/debug` traces data flow backward from the error to its source.
-
-### 3. Safety by Default
-Hooks automatically:
-- Block `rm -rf`, `git push --force`, `chmod 777`
-- Prevent editing `.env`, `.key`, `.pem` files
-- Validate types/syntax after every edit
-- Scan for leaked secrets before shipping
-
-### 4. Stack-Aware
-Skills auto-detect your tech stack and adapt:
-- Next.js project → Server Components patterns, App Router conventions
-- FastAPI project → Pydantic models, async patterns
-- Prisma → N+1 prevention, transaction patterns
-- Docker → Multi-stage builds, security best practices
-
-### 5. Real Patterns, Not Generic Advice
-Every skill contains production code patterns you can use immediately:
-- Cursor-based pagination implementation
-- JWT refresh token rotation
-- Multi-stage Docker builds
-- Proper error handling middleware
-- Database migration safety checklist
+1. **Evidence Over Claims** — Real quality gates, not just promises
+2. **Fix the Root Cause** — 5 Whys technique, backward tracing
+3. **Safety by Default** — Hooks block destructive ops automatically
+4. **Stack-Aware** — Auto-detect and adapt to your tech stack
+5. **Real Patterns** — Production code you can use immediately
 
 ## Customization
 
@@ -224,22 +149,6 @@ paths:
 # Rules for this area
 - Your coding standards here
 EOF
-```
-
-### Add Your Own Hooks
-Add to `.claude/settings.json`:
-```json
-{
-  "hooks": {
-    "PostToolUse": [{
-      "matcher": "Edit|Write",
-      "hooks": [{
-        "type": "command",
-        "command": "your-script.sh"
-      }]
-    }]
-  }
-}
 ```
 
 ## Requirements
