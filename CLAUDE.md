@@ -51,6 +51,13 @@ Claudekit auto-detects your project stack from config files:
 - `/debug <symptom>` - Systematic root cause analysis
 - `/optimize <target>` - Performance profiling and optimization
 - `/api <spec>` - Design and implement API endpoints
+- `/e2e <scope>` - End-to-end testing with Playwright
+
+### Context Engineering
+- `/index` - Map codebase architecture, dependencies, patterns
+- `/checkpoint save|restore|list` - Git checkpoint for safe experimentation
+- `/common-ground` - Surface and validate Claude's assumptions about your project
+- `/mode <name>` - Switch behavioral mode (token-efficient, brainstorm, deep-research, implementation, review, orchestration)
 
 ## Quality Gates (Enforced by Hooks)
 
