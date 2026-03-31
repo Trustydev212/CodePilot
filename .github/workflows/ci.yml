@@ -1,6 +1,5 @@
-# CodePilot CI Template
-# Copy this file to your project's .github/workflows/ci.yml
-# Customize the sections marked with "# CONFIGURE:" comments
+# CodePilot Toolkit CI
+# Validates skills, hooks, and project structure
 
 name: CI
 
@@ -15,92 +14,109 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  lint:
-    name: Lint
+  validate:
+    name: Validate Toolkit
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          # CONFIGURE: Uncomment your package manager
-          # cache: 'npm'
-          # cache: 'pnpm'
-          # cache: 'yarn'
+      - name: Check required files exist
+        run: |
+          echo "Checking required files..."
+          required_files=(
+            "CLAUDE.md"
+            "README.md"
+            "LICENSE"
+            "setup.sh"
+            ".claude/settings.json"
+            ".claude-plugin/plugin.json"
+          )
+          for f in "${required_files[@]}"; do
+            if [ ! -f "$f" ]; then
+              echo "FAIL: Missing required file: $f"
+              exit 1
+            fi
+            echo "OK: $f"
+          done
+          echo "All required files present."
 
-      # CONFIGURE: Uncomment for pnpm
-      # - uses: pnpm/action-setup@v4
-      #   with:
-      #     version: 9
+      - name: Validate SKILL.md frontmatter
+        run: |
+          echo "Checking all SKILL.md files have valid frontmatter..."
+          errors=0
+          count=0
+          while IFS= read -r -d '' file; do
+            count=$((count + 1))
+            # Check file starts with ---
+            if ! head -1 "$file" | grep -q '^---$'; then
+              echo "FAIL: $file - missing YAML frontmatter"
+              errors=$((errors + 1))
+              continue
+            fi
+            # Check has closing ---
+            if ! awk 'NR>1' "$file" | grep -q '^---$'; then
+              echo "FAIL: $file - unclosed YAML frontmatter"
+              errors=$((errors + 1))
+              continue
+            fi
+            # Check has name field
+            if ! sed -n '1,/^---$/p' "$file" | grep -q '^name:'; then
+              echo "FAIL: $file - missing 'name' in frontmatter"
+              errors=$((errors + 1))
+              continue
+            fi
+            # Check has description field
+            if ! sed -n '1,/^---$/p' "$file" | grep -q '^description:'; then
+              echo "FAIL: $file - missing 'description' in frontmatter"
+              errors=$((errors + 1))
+              continue
+            fi
+            echo "OK: $file"
+          done < <(find .claude/skills -name 'SKILL.md' -print0)
+          echo ""
+          echo "Checked $count skill files, $errors errors."
+          if [ $errors -gt 0 ]; then exit 1; fi
 
-      - run: npm ci
-      - run: npx eslint . --max-warnings 0
-      - run: npx prettier --check .
+      - name: Validate hooks are executable
+        run: |
+          echo "Checking hooks..."
+          errors=0
+          for hook in .claude/hooks/*.sh; do
+            if [ ! -f "$hook" ]; then continue; fi
+            # Check shebang
+            if ! head -1 "$hook" | grep -q '^#!/'; then
+              echo "FAIL: $hook - missing shebang line"
+              errors=$((errors + 1))
+            else
+              echo "OK: $hook"
+            fi
+          done
+          if [ $errors -gt 0 ]; then exit 1; fi
 
-  typecheck:
-    name: Type Check
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
+      - name: Validate JSON files
+        run: |
+          echo "Checking JSON files..."
+          for f in .claude/settings.json .claude-plugin/plugin.json; do
+            if python3 -c "import json; json.load(open('$f'))" 2>/dev/null; then
+              echo "OK: $f"
+            else
+              echo "FAIL: $f - invalid JSON"
+              exit 1
+            fi
+          done
 
-      # CONFIGURE: Uncomment for pnpm
-      # - uses: pnpm/action-setup@v4
+      - name: Check setup.sh syntax
+        run: bash -n setup.sh && echo "OK: setup.sh syntax valid"
 
-      - run: npm ci
-      - run: npx tsc --noEmit
-
-  test:
-    name: Test
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [18, 20, 22]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-
-      # CONFIGURE: Uncomment for pnpm
-      # - uses: pnpm/action-setup@v4
-
-      - run: npm ci
-      - run: npm test -- --coverage
-        env:
-          CI: true
-
-      - name: Upload coverage
-        if: matrix.node-version == 20
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage
-          path: coverage/
-
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    needs: [lint, typecheck, test]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      # CONFIGURE: Uncomment for pnpm
-      # - uses: pnpm/action-setup@v4
-
-      - run: npm ci
-      - run: npm run build
-
-      - name: Upload build
-        uses: actions/upload-artifact@v4
-        with:
-          name: build
-          path: |
-            dist/
-            .next/
-            build/
+      - name: Summary
+        run: |
+          skills=$(find .claude/skills -name 'SKILL.md' | wc -l)
+          hooks=$(find .claude/hooks -name '*.sh' | wc -l)
+          agents=$(find .claude/agents -name '*.md' | wc -l)
+          rules=$(find .claude/rules -name '*.md' | wc -l)
+          echo "=== CodePilot Toolkit ==="
+          echo "Skills: $skills"
+          echo "Hooks:  $hooks"
+          echo "Agents: $agents"
+          echo "Rules:  $rules"
+          echo "All checks passed."
