@@ -41,9 +41,11 @@
       "Write(.env)",
       "Write(.env.local)",
       "Write(.env.production)",
+      "Write(.env.staging)",
       "Edit(.env)",
       "Edit(.env.local)",
-      "Edit(.env.production)"
+      "Edit(.env.production)",
+      "Edit(.env.staging)"
     ]
   },
   "hooks": {

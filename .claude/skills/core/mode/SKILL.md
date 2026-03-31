@@ -2,6 +2,7 @@
 name: mode
 description: "Switch behavioral modes: token-efficient, brainstorm, deep-research, implementation, review, orchestration. Optimize responses for different task types."
 user-invocable: true
+allowed-tools: Read, Grep, Glob, Bash
 ---
 
 # /mode - Behavioral Mode Switching

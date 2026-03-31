@@ -81,8 +81,10 @@ export default async function Dashboard() {
 ### Server Components (preferred)
 ```tsx
 // Direct async/await - no useEffect, no loading state management
-async function ProductPage({ params }: { params: { id: string } }) {
-  const product = await db.product.findUnique({ where: { id: params.id } })
+// Note: In Next.js 15+, params is a Promise
+async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const product = await db.product.findUnique({ where: { id } })
   if (!product) notFound()
   return <ProductDetail product={product} />
 }

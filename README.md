@@ -23,9 +23,11 @@ cp -r claudehub/.claude /path/to/your/project/
 cp claudehub/CLAUDE.md /path/to/your/project/
 ```
 
-### Option 2: Use as Claude Code plugin
-```
-/plugin marketplace add trustydev212/claudehub
+### Option 2: Git submodule (auto-update)
+```bash
+git submodule add https://github.com/trustydev212/claudehub.git .claudekit
+cp -r .claudekit/.claude .claude/
+cp .claudekit/CLAUDE.md CLAUDE.md
 ```
 
 ## What's Included

@@ -153,7 +153,7 @@ export const useCartStore = defineStore('cart', () => {
   {#if showEmail}
     <p>{user.email}</p>
   {/if}
-  <button onclick|stopPropagation={() => ondelete?.(user.id)}>Delete</button>
+  <button onclick={(e) => { e.stopPropagation(); ondelete?.(user.id) }}>Delete</button>
 </div>
 ```
 
