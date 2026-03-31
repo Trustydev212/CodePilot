@@ -62,11 +62,17 @@ CodePilot auto-detects your project stack from config files:
 - `/batch <operation>` - Apply changes across multiple files in parallel (rename, replace, transform)
 - `/loop <type>` - Automated fix-verify cycles until all quality gates pass
 - `/issue <number>` - Full issue-to-PR pipeline (read → plan → implement → test → PR)
+- `/upgrade <framework>` - Guided major version upgrades with codemods and migration
 
 ### Utilities
 - `/debug <symptom>` - Systematic root cause analysis
 - `/optimize <target>` - Performance profiling and optimization
 - `/perf <target>` - Bundle analysis, API latency, render performance, regression detection
+- `/security` - Security scanning (deps, secrets, OWASP Top 10, headers)
+- `/a11y` - Accessibility audit and auto-fix (WCAG 2.1 AA)
+- `/i18n <action>` - Internationalization management (extract, sync, check translations)
+- `/storybook <component>` - Auto-generate Storybook stories from components
+- `/db-migrate` - Safe database migration with rollback generation
 - `/api <spec>` - Design and implement API endpoints
 - `/e2e <scope>` - End-to-end testing with Playwright
 - `/changelog` - Auto-generate changelogs from conventional commits

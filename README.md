@@ -36,7 +36,7 @@ cp .codepilot/CLAUDE.md CLAUDE.md
 
 ## What's Included
 
-### Workflow Commands (31 Slash Commands)
+### Workflow Commands (37+ Slash Commands)
 
 | Command | Description |
 |---------|-------------|
@@ -62,17 +62,23 @@ cp .codepilot/CLAUDE.md CLAUDE.md
 | `/env` | Validate env vars, generate .env.example, detect leaks |
 | `/seed` | Generate database seed data from schema |
 | `/monitor` | Set up error tracking, health checks, logging |
-| `/batch <operation>` | Apply changes across multiple files in parallel |
-| `/loop <type>` | Automated fix-verify cycles until all checks pass |
-| `/issue <number>` | Full issue-to-PR pipeline |
-| `/perf <target>` | Bundle analysis, API latency, render performance |
 | `/index` | Map codebase architecture, dependencies, patterns |
 | `/checkpoint save\|restore\|list` | Git checkpoints for safe experimentation |
 | `/common-ground` | Surface and validate Claude's assumptions |
 | `/mode <name>` | Switch behavioral mode (token-efficient, brainstorm, etc.) |
 | `/learn` | Analyze codebase patterns, auto-generate custom rules |
+| `/batch <operation>` | Apply changes across multiple files in parallel |
+| `/loop <type>` | Automated fix-verify cycles until all checks pass |
+| `/issue <number>` | Full issue-to-PR pipeline |
+| `/perf <target>` | Bundle analysis, API latency, render performance |
+| `/security` | Security scanning (deps, secrets, OWASP, headers) |
+| `/a11y` | Accessibility audit and auto-fix (WCAG 2.1 AA) |
+| `/i18n <action>` | Internationalization (extract, sync, check translations) |
+| `/storybook <component>` | Auto-generate Storybook stories from components |
+| `/db-migrate` | Safe database migration with rollback generation |
+| `/upgrade <framework>` | Guided major version upgrades with codemods |
 
-### Expert Skills (10 Auto-activated)
+### Expert Skills (Auto-activated)
 
 | Skill | Activates When |
 |-------|---------------|
@@ -87,7 +93,7 @@ cp .codepilot/CLAUDE.md CLAUDE.md
 | **vue-svelte** | Working with `.vue/.svelte` files, Nuxt/SvelteKit |
 | **state-graphql** | Working with stores, GraphQL, tRPC files |
 
-### Safety Hooks (4 Always Active)
+### Safety Hooks (Always Active)
 
 | Hook | What It Does |
 |------|-------------|
@@ -96,18 +102,7 @@ cp .codepilot/CLAUDE.md CLAUDE.md
 | **quality-gate** | Auto-checks types/syntax after every file edit |
 | **auto-format** | Auto-formats files after edits (Prettier, Black, gofmt, rustfmt) |
 
-### Specialized Agents (6)
-
-| Agent | Purpose |
-|-------|--------|
-| **planner** | Architecture planning with trade-off analysis |
-| **reviewer** | 6-aspect code review (arch, security, perf, test, quality, DX) |
-| **tester** | Test generation focused on behavior and edge cases |
-| **debugger** | Root cause analysis with 5 Whys technique |
-| **security-auditor** | OWASP Top 10, secret scanning, dependency audit |
-| **performance-analyzer** | Profiling and optimization with data |
-
-### Coding Rules (5 Path-scoped)
+### Coding Rules (Path-scoped)
 
 | Rule | Applied To |
 |------|----------|
@@ -117,31 +112,55 @@ cp .codepilot/CLAUDE.md CLAUDE.md
 | **api** | All API/route files |
 | **git** | All files (commit practices) |
 
-### CI/CD Templates
-
-| Template | Description |
-|----------|------------|
-| **ci.yml** | Lint, typecheck, test (Node 18/20/22 matrix), build |
-| **release.yml** | Auto-changelog, GitHub releases from tags |
-
 ## Project Structure
 
 ```
 .claude/
 ├── settings.json                    # Permissions, hooks config
 ├── skills/
-│   ├── workflow/ (20 skills)         # Slash commands
-│   ├── frontend/ (4 skills)          # React, Vue, Svelte, styling
-│   ├── backend/ (5 skills)           # API, DB, auth, Node, Python
-│   ├── devops/ (1 skill)             # Docker + CI/CD
-│   ├── quality/ (5 skills)           # Debug, test, audit, optimize, e2e
-│   └── core/ (6 skills)              # Refactor, index, checkpoint, mode, learn
-├── hooks/ (4 + self-test)           # Safety, secrets, quality, format
-├── rules/ (5 rules)                # TS, React, testing, API, git
-└── agents/ (6 agents)              # Planner, reviewer, tester, debugger, security, perf
-.github/workflows/                   # CI + Release templates
-CLAUDE.md                            # Project context & philosophy
-setup.sh                             # One-line installer
+│   ├── workflow/                     # 26 slash commands
+│   │   ├── feature/SKILL.md         # /feature
+│   │   ├── fix/SKILL.md             # /fix
+│   │   ├── plan/SKILL.md            # /plan
+│   │   ├── ship/SKILL.md            # /ship
+│   │   ├── review/SKILL.md          # /review
+│   │   ├── deploy/SKILL.md          # /deploy
+│   │   ├── api/SKILL.md             # /api
+│   │   ├── commit/SKILL.md          # /commit
+│   │   ├── pr/SKILL.md              # /pr
+│   │   ├── migrate/SKILL.md         # /migrate
+│   │   ├── scaffold/SKILL.md        # /scaffold
+│   │   ├── docs/SKILL.md            # /docs
+│   │   ├── changelog/SKILL.md       # /changelog
+│   │   ├── env/SKILL.md             # /env
+│   │   ├── seed/SKILL.md            # /seed
+│   │   ├── monitor/SKILL.md         # /monitor
+│   │   ├── batch/SKILL.md           # /batch
+│   │   ├── loop/SKILL.md            # /loop
+│   │   ├── issue/SKILL.md           # /issue
+│   │   ├── perf/SKILL.md            # /perf
+│   │   ├── security/SKILL.md        # /security
+│   │   ├── a11y/SKILL.md            # /a11y
+│   │   ├── i18n/SKILL.md            # /i18n
+│   │   ├── storybook/SKILL.md       # /storybook
+│   │   ├── db-migrate/SKILL.md      # /db-migrate
+│   │   └── upgrade/SKILL.md         # /upgrade
+│   ├── frontend/                     # 4 auto-activated skills
+│   ├── backend/                      # 5 auto-activated skills
+│   ├── devops/                       # 1 auto-activated skill
+│   ├── quality/                      # 5 quality skills
+│   └── core/                         # 6 core skills
+├── hooks/
+│   ├── safety-guard.sh              # 100+ protection patterns
+│   ├── protect-secrets.sh           # Protect sensitive files
+│   ├── quality-gate.sh              # Auto type/syntax check
+│   ├── auto-format.sh               # Auto-format after edits
+│   └── self-test.sh                 # Hook verification tests
+├── rules/                            # 5 coding rules
+└── agents/                           # 6 specialized agents
+.github/workflows/
+├── ci.yml                           # CI template
+└── release.yml                      # Release template
 ```
 
 ## Design Philosophy
