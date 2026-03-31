@@ -64,11 +64,20 @@ CodePilot auto-detects your project stack from config files:
 - `/issue <number>` - Full issue-to-PR pipeline (read → plan → implement → test → PR)
 - `/upgrade <framework>` - Guided major version upgrades with codemods and migration
 
-### UI & Design
-- `/ui <description>` - Generate UI components from text (v0-style, shadcn-aware)
-- `/design-system` - Create, audit, manage design tokens and theme consistency
-- `/screenshot-to-code <image>` - Convert screenshots/mockups to React/Vue components
-- `/storybook <component>` - Auto-generate Storybook stories from components
+### Enterprise / SaaS
+- `/saas-auth` - Multi-tenant auth with RBAC, API keys, audit logging
+- `/payment` - Stripe integration (checkout, webhooks, billing portal, usage limits)
+- `/money-safe` - Financial safety (idempotency, double-entry ledger, fraud detection, reconciliation)
+- `/queue` - Background jobs (BullMQ/Celery, dead letter queues, cron scheduling)
+- `/realtime` - Real-time updates (SSE, WebSocket, Pusher, optimistic updates)
+- `/email` - Transactional email (Resend + React Email templates)
+- `/storage` - File uploads (S3/R2 presigned URLs, image optimization, responsive variants)
+- `/cache` - Caching strategies (Redis cache-aside, stale-while-revalidate, invalidation)
+- `/search` - Full-text search (PostgreSQL FTS, Meilisearch, autocomplete, faceted filters)
+- `/admin` - Admin dashboard (role-based layout, CRUD generation, stats)
+- `/analytics` - Product analytics (event tracking, funnels, SaaS metrics)
+- `/export` - Data export (CSV, PDF invoices, Excel, scheduled reports)
+- `/process` - Business processes (state machines, approval flows, multi-step wizards)
 
 ### Utilities
 - `/debug <symptom>` - Systematic root cause analysis
@@ -77,6 +86,10 @@ CodePilot auto-detects your project stack from config files:
 - `/security` - Security scanning (deps, secrets, OWASP Top 10, headers)
 - `/a11y` - Accessibility audit and auto-fix (WCAG 2.1 AA)
 - `/i18n <action>` - Internationalization management (extract, sync, check translations)
+- `/storybook <component>` - Auto-generate Storybook stories from components
+- `/ui <description>` - Generate UI components from text (v0-style, shadcn-aware)
+- `/design-system` - Create, audit, manage design tokens and theme consistency
+- `/screenshot-to-code <image>` - Convert screenshots/mockups to React/Vue components
 - `/db-migrate` - Safe database migration with rollback generation
 - `/api <spec>` - Design and implement API endpoints
 - `/e2e <scope>` - End-to-end testing with Playwright

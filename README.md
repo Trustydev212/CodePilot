@@ -36,7 +36,7 @@ cp .codepilot/CLAUDE.md CLAUDE.md
 
 ## What's Included
 
-### 40+ Workflow Commands (Slash Commands)
+### 53+ Workflow Commands (Slash Commands)
 
 | Command | Description |
 |---------|-------------|
@@ -62,6 +62,11 @@ cp .codepilot/CLAUDE.md CLAUDE.md
 | `/env` | Validate env vars, generate .env.example, detect leaks |
 | `/seed` | Generate database seed data from schema |
 | `/monitor` | Set up error tracking, health checks, logging |
+| `/index` | Map codebase architecture, dependencies, patterns |
+| `/checkpoint save\|restore\|list` | Git checkpoints for safe experimentation |
+| `/common-ground` | Surface and validate Claude's assumptions |
+| `/mode <name>` | Switch behavioral mode (token-efficient, brainstorm, etc.) |
+| `/learn` | Analyze codebase patterns, auto-generate custom rules |
 | `/batch <operation>` | Apply changes across multiple files in parallel |
 | `/loop <type>` | Automated fix-verify cycles until all checks pass |
 | `/issue <number>` | Full issue-to-PR pipeline |
@@ -75,11 +80,19 @@ cp .codepilot/CLAUDE.md CLAUDE.md
 | `/ui <description>` | Generate UI components from text (v0-style) |
 | `/design-system` | Design tokens, theme audit, consistency enforcement |
 | `/screenshot-to-code` | Convert screenshots/mockups to production components |
-| `/index` | Map codebase architecture, dependencies, patterns |
-| `/checkpoint save\|restore\|list` | Git checkpoints for safe experimentation |
-| `/common-ground` | Surface and validate Claude's assumptions |
-| `/mode <name>` | Switch behavioral mode (token-efficient, brainstorm, etc.) |
-| `/learn` | Analyze codebase patterns, auto-generate custom rules |
+| `/saas-auth` | Multi-tenant auth with RBAC, API keys, audit logging |
+| `/payment` | Stripe integration (checkout, webhooks, billing portal) |
+| `/money-safe` | Financial safety (idempotency, ledger, fraud detection) |
+| `/queue` | Background jobs (BullMQ, dead letter queues, cron) |
+| `/realtime` | Real-time updates (SSE, WebSocket, optimistic updates) |
+| `/email` | Transactional email (Resend + React Email templates) |
+| `/storage` | File uploads (S3/R2 presigned URLs, image optimization) |
+| `/cache` | Caching strategies (Redis, stale-while-revalidate) |
+| `/search` | Full-text search (PostgreSQL FTS, Meilisearch, facets) |
+| `/admin` | Admin dashboard (role-based layout, CRUD generation) |
+| `/analytics` | Product analytics (event tracking, funnels, metrics) |
+| `/export` | Data export (CSV, PDF invoices, Excel, scheduled reports) |
+| `/process` | Business processes (state machines, approval flows) |
 
 ### Expert Skills (Auto-activated)
 
@@ -108,20 +121,152 @@ cp .codepilot/CLAUDE.md CLAUDE.md
 ### Coding Rules (Path-scoped)
 
 | Rule | Applied To |
-|------|----------|
+|------|-----------|
 | **typescript** | All `.ts/.tsx` files |
 | **react** | All React components |
 | **testing** | All test files |
 | **api** | All API/route files |
 | **git** | All files (commit practices) |
 
+## Project Structure
+
+```
+.claude/
+├── settings.json                    # Permissions, hooks config
+├── skills/
+│   ├── workflow/                     # Slash commands (53+)
+│   │   ├── feature/SKILL.md         # /feature
+│   │   ├── fix/SKILL.md             # /fix
+│   │   ├── plan/SKILL.md            # /plan
+│   │   ├── ship/SKILL.md            # /ship
+│   │   ├── review/SKILL.md          # /review
+│   │   ├── deploy/SKILL.md          # /deploy
+│   │   ├── api/SKILL.md             # /api
+│   │   ├── commit/SKILL.md          # /commit
+│   │   ├── pr/SKILL.md              # /pr
+│   │   ├── migrate/SKILL.md         # /migrate
+│   │   ├── scaffold/SKILL.md        # /scaffold
+│   │   ├── docs/SKILL.md            # /docs
+│   │   ├── changelog/SKILL.md       # /changelog
+│   │   ├── env/SKILL.md             # /env
+│   │   ├── seed/SKILL.md            # /seed
+│   │   ├── monitor/SKILL.md         # /monitor
+│   │   ├── batch/SKILL.md           # /batch
+│   │   ├── loop/SKILL.md            # /loop
+│   │   ├── issue/SKILL.md           # /issue
+│   │   ├── perf/SKILL.md            # /perf
+│   │   ├── security/SKILL.md        # /security
+│   │   ├── a11y/SKILL.md            # /a11y
+│   │   ├── i18n/SKILL.md            # /i18n
+│   │   ├── storybook/SKILL.md       # /storybook
+│   │   ├── db-migrate/SKILL.md      # /db-migrate
+│   │   ├── upgrade/SKILL.md         # /upgrade
+│   │   ├── ui/SKILL.md              # /ui
+│   │   ├── design-system/SKILL.md   # /design-system
+│   │   ├── screenshot-to-code/SKILL.md # /screenshot-to-code
+│   │   ├── saas-auth/SKILL.md       # /saas-auth
+│   │   ├── payment/SKILL.md         # /payment
+│   │   ├── money-safe/SKILL.md      # /money-safe
+│   │   ├── queue/SKILL.md           # /queue
+│   │   ├── realtime/SKILL.md        # /realtime
+│   │   ├── email/SKILL.md           # /email
+│   │   ├── storage/SKILL.md         # /storage
+│   │   ├── cache/SKILL.md           # /cache
+│   │   ├── search/SKILL.md          # /search
+│   │   ├── admin/SKILL.md           # /admin
+│   │   ├── analytics/SKILL.md       # /analytics
+│   │   ├── export/SKILL.md          # /export
+│   │   └── process/SKILL.md         # /process
+│   ├── frontend/
+│   │   ├── react-nextjs/SKILL.md    # React 19 + Next.js 15
+│   │   ├── ui-styling/SKILL.md      # Tailwind + shadcn/ui + a11y
+│   │   ├── vue-svelte/SKILL.md      # Vue 3 + Svelte 5
+│   │   └── state-graphql/SKILL.md   # Zustand, TanStack Query, tRPC
+│   ├── backend/
+│   │   ├── api-design/SKILL.md      # RESTful API patterns (auto)
+│   │   ├── database/SKILL.md        # PostgreSQL, Prisma, Drizzle
+│   │   ├── auth/SKILL.md            # Auth & authorization
+│   │   ├── nodejs/SKILL.md          # Node.js/Express/Fastify
+│   │   └── python-backend/SKILL.md  # FastAPI/Django/SQLAlchemy
+│   ├── devops/
+│   │   └── docker-cicd/SKILL.md     # Docker + GitHub Actions
+│   ├── quality/
+│   │   ├── debug/SKILL.md           # /debug
+│   │   ├── test/SKILL.md            # /test
+│   │   ├── audit/SKILL.md           # /audit
+│   │   ├── optimize/SKILL.md        # /optimize
+│   │   └── e2e-testing/SKILL.md     # /e2e (Playwright)
+│   └── core/
+│       ├── refactor/SKILL.md        # /refactor
+│       ├── index/SKILL.md           # /index
+│       ├── checkpoint/SKILL.md      # /checkpoint
+│       ├── common-ground/SKILL.md   # /common-ground
+│       ├── mode/SKILL.md            # /mode
+│       └── learn/SKILL.md           # /learn
+├── hooks/
+│   ├── safety-guard.sh              # 100+ protection patterns (11 categories)
+│   ├── protect-secrets.sh           # Protect sensitive files + symlink detection
+│   ├── quality-gate.sh              # Auto type/syntax check after edits
+│   ├── auto-format.sh              # Auto-format files after edits (Prettier, Black, gofmt)
+│   └── self-test.sh                 # Hook verification tests (17 checks)
+├── rules/
+│   ├── typescript.md                # TypeScript standards
+│   ├── react.md                     # React patterns
+│   ├── testing.md                   # Testing practices
+│   ├── api.md                       # API design rules
+│   └── git.md                       # Git workflow rules
+└── agents/
+    ├── planner.md                   # Architecture planning agent
+    ├── reviewer.md                  # 6-aspect code review agent
+    ├── tester.md                    # Test generation agent
+    ├── debugger.md                  # Root cause analysis agent
+    ├── security-auditor.md          # Security audit agent
+    └── performance-analyzer.md      # Performance profiling agent
+.github/
+├── workflows/
+│   ├── ci.yml                       # CI template (lint, typecheck, test, build)
+│   └── release.yml                  # Release template (changelog, GitHub release)
+CLAUDE.md                            # Project context & philosophy
+.mcp.json.example                    # Recommended MCP server configs
+.claude-plugin/plugin.json           # Plugin manifest
+setup.sh                             # One-line installer
+LICENSE                              # MIT license
+```
+
 ## Design Philosophy
 
-1. **Evidence Over Claims** — Real quality gates, not just promises
-2. **Fix the Root Cause** — 5 Whys technique, backward tracing
-3. **Safety by Default** — Hooks block destructive ops automatically
-4. **Stack-Aware** — Auto-detect and adapt to your tech stack
-5. **Real Patterns** — Production code you can use immediately
+### 1. Evidence Over Claims
+Every workflow runs real quality gates before reporting completion:
+- `tsc --noEmit` for type safety
+- `eslint --max-warnings=0` for lint
+- `npm test` / `pytest` for test suite
+- `npm run build` for build verification
+
+### 2. Fix the Root Cause
+`/fix` uses 5 Whys technique to find the actual cause, not just patch symptoms.
+`/debug` traces data flow backward from the error to its source.
+
+### 3. Safety by Default
+Hooks automatically:
+- Block `rm -rf`, `git push --force`, `chmod 777`
+- Prevent editing `.env`, `.key`, `.pem` files
+- Validate types/syntax after every edit
+- Scan for leaked secrets before shipping
+
+### 4. Stack-Aware
+Skills auto-detect your tech stack and adapt:
+- Next.js project → Server Components patterns, App Router conventions
+- FastAPI project → Pydantic models, async patterns
+- Prisma → N+1 prevention, transaction patterns
+- Docker → Multi-stage builds, security best practices
+
+### 5. Real Patterns, Not Generic Advice
+Every skill contains production code patterns you can use immediately:
+- Cursor-based pagination implementation
+- JWT refresh token rotation
+- Multi-stage Docker builds
+- Proper error handling middleware
+- Database migration safety checklist
 
 ## Customization
 
@@ -149,6 +294,22 @@ paths:
 # Rules for this area
 - Your coding standards here
 EOF
+```
+
+### Add Your Own Hooks
+Add to `.claude/settings.json`:
+```json
+{
+  "hooks": {
+    "PostToolUse": [{
+      "matcher": "Edit|Write",
+      "hooks": [{
+        "type": "command",
+        "command": "your-script.sh"
+      }]
+    }]
+  }
+}
 ```
 
 ## Requirements
