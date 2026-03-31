@@ -36,7 +36,7 @@ cp .codepilot/CLAUDE.md CLAUDE.md
 
 ## What's Included
 
-### Workflow Commands (Slash Commands)
+### Workflow Commands (31 Slash Commands)
 
 | Command | Description |
 |---------|-------------|
@@ -62,13 +62,17 @@ cp .codepilot/CLAUDE.md CLAUDE.md
 | `/env` | Validate env vars, generate .env.example, detect leaks |
 | `/seed` | Generate database seed data from schema |
 | `/monitor` | Set up error tracking, health checks, logging |
+| `/batch <operation>` | Apply changes across multiple files in parallel |
+| `/loop <type>` | Automated fix-verify cycles until all checks pass |
+| `/issue <number>` | Full issue-to-PR pipeline |
+| `/perf <target>` | Bundle analysis, API latency, render performance |
 | `/index` | Map codebase architecture, dependencies, patterns |
 | `/checkpoint save\|restore\|list` | Git checkpoints for safe experimentation |
 | `/common-ground` | Surface and validate Claude's assumptions |
 | `/mode <name>` | Switch behavioral mode (token-efficient, brainstorm, etc.) |
 | `/learn` | Analyze codebase patterns, auto-generate custom rules |
 
-### Expert Skills (Auto-activated)
+### Expert Skills (10 Auto-activated)
 
 | Skill | Activates When |
 |-------|---------------|
@@ -83,7 +87,7 @@ cp .codepilot/CLAUDE.md CLAUDE.md
 | **vue-svelte** | Working with `.vue/.svelte` files, Nuxt/SvelteKit |
 | **state-graphql** | Working with stores, GraphQL, tRPC files |
 
-### Safety Hooks (Always Active)
+### Safety Hooks (4 Always Active)
 
 | Hook | What It Does |
 |------|-------------|
@@ -92,15 +96,33 @@ cp .codepilot/CLAUDE.md CLAUDE.md
 | **quality-gate** | Auto-checks types/syntax after every file edit |
 | **auto-format** | Auto-formats files after edits (Prettier, Black, gofmt, rustfmt) |
 
-### Coding Rules (Path-scoped)
+### Specialized Agents (6)
+
+| Agent | Purpose |
+|-------|--------|
+| **planner** | Architecture planning with trade-off analysis |
+| **reviewer** | 6-aspect code review (arch, security, perf, test, quality, DX) |
+| **tester** | Test generation focused on behavior and edge cases |
+| **debugger** | Root cause analysis with 5 Whys technique |
+| **security-auditor** | OWASP Top 10, secret scanning, dependency audit |
+| **performance-analyzer** | Profiling and optimization with data |
+
+### Coding Rules (5 Path-scoped)
 
 | Rule | Applied To |
-|------|-----------|
+|------|----------|
 | **typescript** | All `.ts/.tsx` files |
 | **react** | All React components |
 | **testing** | All test files |
 | **api** | All API/route files |
 | **git** | All files (commit practices) |
+
+### CI/CD Templates
+
+| Template | Description |
+|----------|------------|
+| **ci.yml** | Lint, typecheck, test (Node 18/20/22 matrix), build |
+| **release.yml** | Auto-changelog, GitHub releases from tags |
 
 ## Project Structure
 
@@ -108,73 +130,18 @@ cp .codepilot/CLAUDE.md CLAUDE.md
 .claude/
 ├── settings.json                    # Permissions, hooks config
 ├── skills/
-│   ├── workflow/                     # Slash commands
-│   │   ├── feature/SKILL.md         # /feature
-│   │   ├── fix/SKILL.md             # /fix
-│   │   ├── plan/SKILL.md            # /plan
-│   │   ├── ship/SKILL.md            # /ship
-│   │   ├── review/SKILL.md          # /review
-│   │   ├── deploy/SKILL.md          # /deploy
-│   │   ├── api/SKILL.md             # /api
-│   │   ├── commit/SKILL.md          # /commit
-│   │   ├── pr/SKILL.md              # /pr
-│   │   ├── migrate/SKILL.md         # /migrate
-│   │   ├── scaffold/SKILL.md        # /scaffold
-│   │   ├── docs/SKILL.md            # /docs
-│   │   ├── changelog/SKILL.md       # /changelog
-│   │   ├── env/SKILL.md             # /env
-│   │   ├── seed/SKILL.md            # /seed
-│   │   └── monitor/SKILL.md         # /monitor
-│   ├── frontend/
-│   │   ├── react-nextjs/SKILL.md    # React 19 + Next.js 15
-│   │   ├── ui-styling/SKILL.md      # Tailwind + shadcn/ui + a11y
-│   │   ├── vue-svelte/SKILL.md      # Vue 3 + Svelte 5
-│   │   └── state-graphql/SKILL.md   # Zustand, TanStack Query, tRPC
-│   ├── backend/
-│   │   ├── api-design/SKILL.md      # RESTful API patterns (auto)
-│   │   ├── database/SKILL.md        # PostgreSQL, Prisma, Drizzle
-│   │   ├── auth/SKILL.md            # Auth & authorization
-│   │   ├── nodejs/SKILL.md          # Node.js/Express/Fastify
-│   │   └── python-backend/SKILL.md  # FastAPI/Django/SQLAlchemy
-│   ├── devops/
-│   │   └── docker-cicd/SKILL.md     # Docker + GitHub Actions
-│   ├── quality/
-│   │   ├── debug/SKILL.md           # /debug
-│   │   ├── test/SKILL.md            # /test
-│   │   ├── audit/SKILL.md           # /audit
-│   │   ├── optimize/SKILL.md        # /optimize
-│   │   └── e2e-testing/SKILL.md     # /e2e (Playwright)
-│   └── core/
-│       ├── refactor/SKILL.md        # /refactor
-│       ├── index/SKILL.md           # /index
-│       ├── checkpoint/SKILL.md      # /checkpoint
-│       ├── common-ground/SKILL.md   # /common-ground
-│       ├── mode/SKILL.md            # /mode
-│       └── learn/SKILL.md           # /learn
-├── hooks/
-│   ├── safety-guard.sh              # 100+ protection patterns (11 categories)
-│   ├── protect-secrets.sh           # Protect sensitive files + symlink detection
-│   ├── quality-gate.sh              # Auto type/syntax check after edits
-│   ├── auto-format.sh              # Auto-format files after edits (Prettier, Black, gofmt)
-│   └── self-test.sh                 # Hook verification tests (17 checks)
-├── rules/
-│   ├── typescript.md                # TypeScript standards
-│   ├── react.md                     # React patterns
-│   ├── testing.md                   # Testing practices
-│   ├── api.md                       # API design rules
-│   └── git.md                       # Git workflow rules
-└── agents/
-    ├── planner.md                   # Architecture planning agent
-    ├── reviewer.md                  # 6-aspect code review agent
-    ├── tester.md                    # Test generation agent
-    ├── debugger.md                  # Root cause analysis agent
-    ├── security-auditor.md          # Security audit agent
-    └── performance-analyzer.md      # Performance profiling agent
+│   ├── workflow/ (20 skills)         # Slash commands
+│   ├── frontend/ (4 skills)          # React, Vue, Svelte, styling
+│   ├── backend/ (5 skills)           # API, DB, auth, Node, Python
+│   ├── devops/ (1 skill)             # Docker + CI/CD
+│   ├── quality/ (5 skills)           # Debug, test, audit, optimize, e2e
+│   └── core/ (6 skills)              # Refactor, index, checkpoint, mode, learn
+├── hooks/ (4 + self-test)           # Safety, secrets, quality, format
+├── rules/ (5 rules)                # TS, React, testing, API, git
+└── agents/ (6 agents)              # Planner, reviewer, tester, debugger, security, perf
+.github/workflows/                   # CI + Release templates
 CLAUDE.md                            # Project context & philosophy
-.mcp.json.example                    # Recommended MCP server configs
-.claude-plugin/plugin.json           # Plugin manifest
 setup.sh                             # One-line installer
-LICENSE                              # MIT license
 ```
 
 ## Design Philosophy
