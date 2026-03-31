@@ -58,9 +58,15 @@ CodePilot auto-detects your project stack from config files:
 - `/seed` - Generate database seed data from Prisma/Drizzle schema
 - `/docs [target]` - Auto-generate API docs, component docs, architecture overviews
 
+### Automation
+- `/batch <operation>` - Apply changes across multiple files in parallel (rename, replace, transform)
+- `/loop <type>` - Automated fix-verify cycles until all quality gates pass
+- `/issue <number>` - Full issue-to-PR pipeline (read → plan → implement → test → PR)
+
 ### Utilities
 - `/debug <symptom>` - Systematic root cause analysis
 - `/optimize <target>` - Performance profiling and optimization
+- `/perf <target>` - Bundle analysis, API latency, render performance, regression detection
 - `/api <spec>` - Design and implement API endpoints
 - `/e2e <scope>` - End-to-end testing with Playwright
 - `/changelog` - Auto-generate changelogs from conventional commits
