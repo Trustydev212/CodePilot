@@ -1,6 +1,7 @@
 ---
 name: docker-cicd
 description: "Docker, Docker Compose, CI/CD pipelines (GitHub Actions), deployment patterns. Production-ready containerization."
+user-invocable: false
 paths:
   - "**/Dockerfile*"
   - "**/docker-compose*"

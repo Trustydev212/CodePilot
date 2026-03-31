@@ -3,25 +3,25 @@
     "context7": {
       "type": "stdio",
       "command": "npx",
-      "args": ["-y", "@upstash/context7-mcp@latest"],
+      "args": ["-y", "@upstash/context7-mcp@^1"],
       "description": "Real-time library documentation. Claude gets accurate, up-to-date docs instead of hallucinating outdated APIs."
     },
     "playwright": {
       "type": "stdio",
       "command": "npx",
-      "args": ["-y", "@anthropic/mcp-playwright"],
+      "args": ["-y", "@anthropic/mcp-playwright@^0"],
       "description": "Browser automation for E2E testing, screenshots, and web scraping."
     },
     "memory": {
       "type": "stdio",
       "command": "npx",
-      "args": ["-y", "@anthropic/mcp-memory"],
+      "args": ["-y", "@anthropic/mcp-memory@^0"],
       "description": "Persistent knowledge graph across sessions. Claude remembers project context."
     },
     "postgres": {
       "type": "stdio",
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-postgres"],
+      "args": ["-y", "@modelcontextprotocol/server-postgres@^0"],
       "env": {
         "DATABASE_URL": "$DATABASE_URL"
       },
@@ -30,13 +30,13 @@
     "filesystem": {
       "type": "stdio",
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-filesystem", "."],
+      "args": ["-y", "@modelcontextprotocol/server-filesystem@^0", "."],
       "description": "Enhanced file operations with search, watching, and batch processing."
     },
     "sequential-thinking": {
       "type": "stdio",
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking@^0"],
       "description": "Multi-step structured reasoning with branching and revision capabilities."
     }
   }

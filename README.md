@@ -45,6 +45,12 @@ cp claudehub/CLAUDE.md /path/to/your/project/
 | `/refactor <target>` | Safe refactoring with verification |
 | `/audit` | Security + dependency + code quality audit |
 | `/api <spec>` | Design and implement API endpoints |
+| `/e2e <scope>` | End-to-end testing with Playwright |
+| `/deploy <target>` | Environment-aware deployment with health checks |
+| `/index` | Map codebase architecture, dependencies, patterns |
+| `/checkpoint save\|restore\|list` | Git checkpoints for safe experimentation |
+| `/common-ground` | Surface and validate Claude's assumptions |
+| `/mode <name>` | Switch behavioral mode (token-efficient, brainstorm, etc.) |
 
 ### Expert Skills (Auto-activated)
 
@@ -58,6 +64,8 @@ cp claudehub/CLAUDE.md /path/to/your/project/
 | **nodejs** | Working with Node.js backend code |
 | **python-backend** | Working with Python files, FastAPI, Django |
 | **docker-cicd** | Working with Dockerfile, docker-compose, GitHub Actions |
+| **vue-svelte** | Working with `.vue/.svelte` files, Nuxt/SvelteKit |
+| **state-graphql** | Working with stores, GraphQL, tRPC files |
 
 ### Safety Hooks (Always Active)
 
@@ -88,12 +96,16 @@ cp claudehub/CLAUDE.md /path/to/your/project/
 │   │   ├── fix/SKILL.md             # /fix
 │   │   ├── plan/SKILL.md            # /plan
 │   │   ├── ship/SKILL.md            # /ship
-│   │   └── review/SKILL.md          # /review
+│   │   ├── review/SKILL.md          # /review
+│   │   ├── deploy/SKILL.md          # /deploy
+│   │   └── api/SKILL.md             # /api
 │   ├── frontend/
 │   │   ├── react-nextjs/SKILL.md    # React 19 + Next.js 15
-│   │   └── ui-styling/SKILL.md      # Tailwind + shadcn/ui + a11y
+│   │   ├── ui-styling/SKILL.md      # Tailwind + shadcn/ui + a11y
+│   │   ├── vue-svelte/SKILL.md      # Vue 3 + Svelte 5
+│   │   └── state-graphql/SKILL.md   # Zustand, TanStack Query, tRPC
 │   ├── backend/
-│   │   ├── api-design/SKILL.md      # RESTful API patterns
+│   │   ├── api-design/SKILL.md      # RESTful API patterns (auto)
 │   │   ├── database/SKILL.md        # PostgreSQL, Prisma, Drizzle
 │   │   ├── auth/SKILL.md            # Auth & authorization
 │   │   ├── nodejs/SKILL.md          # Node.js/Express/Fastify
@@ -101,24 +113,36 @@ cp claudehub/CLAUDE.md /path/to/your/project/
 │   ├── devops/
 │   │   └── docker-cicd/SKILL.md     # Docker + GitHub Actions
 │   ├── quality/
-│   │   ├── debugger/SKILL.md        # /debug
-│   │   ├── tester/SKILL.md          # /test
-│   │   ├── security/SKILL.md        # /audit
-│   │   └── optimizer/SKILL.md       # /optimize
+│   │   ├── debug/SKILL.md           # /debug
+│   │   ├── test/SKILL.md            # /test
+│   │   ├── audit/SKILL.md           # /audit
+│   │   ├── optimize/SKILL.md        # /optimize
+│   │   └── e2e-testing/SKILL.md     # /e2e (Playwright)
 │   └── core/
-│       └── refactor/SKILL.md        # /refactor
+│       ├── refactor/SKILL.md        # /refactor
+│       ├── index/SKILL.md           # /index
+│       ├── checkpoint/SKILL.md      # /checkpoint
+│       ├── common-ground/SKILL.md   # /common-ground
+│       └── mode/SKILL.md            # /mode
 ├── hooks/
-│   ├── safety-guard.sh              # Block destructive commands
-│   ├── protect-secrets.sh           # Protect sensitive files
-│   └── quality-gate.sh              # Auto type/syntax check
+│   ├── safety-guard.sh              # 100+ protection patterns (11 categories)
+│   ├── protect-secrets.sh           # Protect sensitive files + symlink detection
+│   └── quality-gate.sh              # Auto type/syntax check after edits
 ├── rules/
 │   ├── typescript.md                # TypeScript standards
 │   ├── react.md                     # React patterns
 │   ├── testing.md                   # Testing practices
 │   ├── api.md                       # API design rules
 │   └── git.md                       # Git workflow rules
-└── agents/                          # (extensible)
+└── agents/
+    ├── planner.md                   # Architecture planning agent
+    ├── reviewer.md                  # 6-aspect code review agent
+    ├── tester.md                    # Test generation agent
+    ├── debugger.md                  # Root cause analysis agent
+    ├── security-auditor.md          # Security audit agent
+    └── performance-analyzer.md      # Performance profiling agent
 CLAUDE.md                            # Project context & philosophy
+.mcp.json.example                    # Recommended MCP server configs
 ```
 
 ## Design Philosophy

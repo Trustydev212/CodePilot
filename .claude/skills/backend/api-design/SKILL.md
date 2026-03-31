@@ -1,7 +1,7 @@
 ---
 name: api-design
 description: "RESTful API design, input validation, error handling, pagination, rate limiting. Build APIs that frontend devs love."
-user-invocable: true
+user-invocable: false
 paths:
   - "**/api/**"
   - "**/routes/**"

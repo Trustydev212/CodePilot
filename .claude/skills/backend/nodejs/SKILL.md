@@ -1,6 +1,7 @@
 ---
 name: nodejs
 description: "Node.js & TypeScript backend patterns. Express, Fastify, Hono, NestJS. Error handling, middleware, project structure, testing."
+user-invocable: false
 paths:
   - "**/server/**"
   - "**/src/api/**"

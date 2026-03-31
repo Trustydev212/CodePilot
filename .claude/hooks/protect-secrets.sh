@@ -40,9 +40,22 @@ if echo "$FILE_PATH" | grep -qiE '(credentials|secrets?|tokens?)\.(json|yaml|yml
 fi
 
 # === PROTECTED DIRECTORIES ===
-if echo "$FILE_PATH" | grep -qE '^\.git/'; then
+# Match both relative (.git/) and absolute (/path/.git/) paths
+if echo "$FILE_PATH" | grep -qE '(^|/)\.git/'; then
   echo "BLOCKED: Cannot modify .git internals" >&2
   exit 2
+fi
+
+# Block symlinks to protected files
+if [ -L "$FILE_PATH" ]; then
+  REAL_PATH=$(readlink -f "$FILE_PATH" 2>/dev/null || echo "$FILE_PATH")
+  REAL_BASENAME=$(basename "$REAL_PATH")
+  for protected in "${PROTECTED_EXACT[@]}"; do
+    if [ "$REAL_BASENAME" = "$protected" ]; then
+      echo "BLOCKED: Symlink points to protected file $REAL_BASENAME" >&2
+      exit 2
+    fi
+  done
 fi
 
 # Allow .env.example

@@ -1,6 +1,7 @@
 ---
 name: auth
 description: "Authentication & authorization patterns. JWT, OAuth, session management, RBAC, secure password handling. Works with Next-Auth, Lucia, Better-Auth, Clerk."
+user-invocable: false
 paths:
   - "**/auth/**"
   - "**/middleware.*"

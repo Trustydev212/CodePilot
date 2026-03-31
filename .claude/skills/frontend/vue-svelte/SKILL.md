@@ -1,6 +1,7 @@
 ---
 name: vue-svelte
 description: "Vue 3 (Composition API, Nuxt 3) and Svelte 5 (SvelteKit) patterns. Reactivity, routing, SSR, state management."
+user-invocable: false
 paths:
   - "**/*.vue"
   - "**/*.svelte"

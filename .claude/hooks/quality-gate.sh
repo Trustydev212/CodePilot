@@ -26,7 +26,14 @@ fi
 
 # === Python: Quick syntax check ===
 if [[ "$EXT" == "py" ]]; then
-  SYNTAX_OUTPUT=$(python -c "import py_compile; py_compile.compile('$FILE_PATH', doraise=True)" 2>&1)
+  SYNTAX_OUTPUT=$(python3 -c "
+import sys, py_compile
+try:
+    py_compile.compile(sys.argv[1], doraise=True)
+except py_compile.PyCompileError as e:
+    print(str(e), file=sys.stderr)
+    sys.exit(1)
+" "$FILE_PATH" 2>&1)
   if [ $? -ne 0 ]; then
     echo "Python syntax error:" >&2
     echo "$SYNTAX_OUTPUT" >&2
@@ -43,7 +50,15 @@ fi
 # === YAML: Validate syntax ===
 if [[ "$EXT" == "yml" || "$EXT" == "yaml" ]]; then
   if command -v python3 &>/dev/null; then
-    python3 -c "import yaml; yaml.safe_load(open('$FILE_PATH'))" 2>/dev/null
+    python3 -c "
+import sys, yaml
+try:
+    with open(sys.argv[1]) as f:
+        yaml.safe_load(f)
+except Exception as e:
+    print(str(e), file=sys.stderr)
+    sys.exit(1)
+" "$FILE_PATH" 2>/dev/null
     if [ $? -ne 0 ]; then
       echo "Invalid YAML in $FILE_PATH" >&2
     fi

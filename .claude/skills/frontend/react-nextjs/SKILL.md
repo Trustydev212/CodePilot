@@ -1,6 +1,7 @@
 ---
 name: react-nextjs
 description: "Expert React 19 & Next.js 15 patterns. Server/client components, App Router, data fetching, state management, performance optimization."
+user-invocable: false
 paths:
   - "**/*.tsx"
   - "**/*.jsx"

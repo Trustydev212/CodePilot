@@ -1,6 +1,7 @@
 ---
 name: ui-styling
 description: "Tailwind CSS v4, shadcn/ui, responsive design, accessibility. Build production-grade UIs that don't look like AI slop."
+user-invocable: false
 paths:
   - "**/*.tsx"
   - "**/*.jsx"

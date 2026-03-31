@@ -1,6 +1,7 @@
 ---
 name: state-graphql
 description: "State management (Zustand, Jotai, TanStack Query) and API patterns (GraphQL, tRPC). Pick the right tool for the job."
+user-invocable: false
 paths:
   - "**/store/**"
   - "**/stores/**"

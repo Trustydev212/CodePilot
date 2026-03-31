@@ -1,6 +1,7 @@
 ---
 name: python-backend
 description: "Python backend with FastAPI, Django, SQLAlchemy. Type-safe, async-first, production patterns."
+user-invocable: false
 paths:
   - "**/*.py"
   - "**/requirements.txt"

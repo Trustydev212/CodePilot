@@ -1,6 +1,7 @@
 ---
 name: database
 description: "PostgreSQL, MongoDB, Prisma, Drizzle ORM patterns. Schema design, migrations, query optimization, indexing strategy."
+user-invocable: false
 paths:
   - "**/prisma/**"
   - "**/drizzle/**"
