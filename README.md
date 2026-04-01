@@ -36,12 +36,18 @@ cp .codepilot/CLAUDE.md CLAUDE.md
 
 ## What's Included
 
-### 53+ Workflow Commands (Slash Commands)
+### 59+ Workflow Commands (Slash Commands)
 
 | Command | Description |
 |---------|-------------|
+| `/cook [task]` | Auto-pilot: CLAUDE.md → brainstorm → code → test → commit |
 | `/feature <desc>` | Plan → Implement → Test → Review (full lifecycle) |
 | `/fix <issue>` | Root cause analysis → Fix → Regression test |
+| `/hotfix <issue>` | Emergency production fix (stash → fix → verify → tag → return) |
+| `/clean [target]` | Remove dead code, unused imports, debug statements |
+| `/explain <target>` | Deep code explanation with Mermaid diagrams |
+| `/health` | Project health score dashboard (deps, types, tests, security) |
+| `/onboard` | Auto-generate onboarding guide for new developers |
 | `/plan <goal>` | Architecture planning with trade-off analysis |
 | `/review` | 6-aspect deep code review |
 | `/ship` | Pre-flight checks before deployment |
@@ -70,6 +76,7 @@ cp .codepilot/CLAUDE.md CLAUDE.md
 | `/batch <operation>` | Apply changes across multiple files in parallel |
 | `/loop <type>` | Automated fix-verify cycles until all checks pass |
 | `/issue <number>` | Full issue-to-PR pipeline |
+| `/watch [options]` | Auto-monitor issues → analyze → create PRs (AI daemon) |
 | `/perf <target>` | Bundle analysis, API latency, render performance |
 | `/security` | Security scanning (deps, secrets, OWASP, headers) |
 | `/a11y` | Accessibility audit and auto-fix (WCAG 2.1 AA) |
@@ -93,6 +100,7 @@ cp .codepilot/CLAUDE.md CLAUDE.md
 | `/analytics` | Product analytics (event tracking, funnels, metrics) |
 | `/export` | Data export (CSV, PDF invoices, Excel, scheduled reports) |
 | `/process` | Business processes (state machines, approval flows) |
+| `/workflow` | Business process automation (state machines, approval flows, pipelines) |
 
 ### Expert Skills (Auto-activated)
 
@@ -117,11 +125,12 @@ cp .codepilot/CLAUDE.md CLAUDE.md
 | **protect-secrets** | Prevents editing `.env`, `.key`, `.pem`, credential files |
 | **quality-gate** | Auto-checks types/syntax after every file edit |
 | **auto-format** | Auto-formats files after edits (Prettier, Black, gofmt, rustfmt) |
+| **commit-guard** | Blocks commits with debug statements, conflict markers, hardcoded secrets |
 
 ### Coding Rules (Path-scoped)
 
 | Rule | Applied To |
-|------|-----------|
+|------|------------|
 | **typescript** | All `.ts/.tsx` files |
 | **react** | All React components |
 | **testing** | All test files |
