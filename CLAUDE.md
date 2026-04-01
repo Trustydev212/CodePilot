@@ -3,6 +3,53 @@
 > Production-grade skills, agents, and automation for Claude Code.
 > Every tool solves a real pain point. No fluff.
 
+## How It Works
+
+**You don't need to memorize 53+ commands.** Just tell Claude what you want in natural language. CodePilot auto-selects the right skill based on your request.
+
+### Auto-Skill Selection
+
+When the user describes a task, Claude MUST automatically read and follow the most relevant skill from `.claude/skills/`. Match by intent:
+
+| User says... | Claude reads & follows |
+|---|---|
+| "build feature X" / "implement X" / "add X" | `.claude/skills/workflow/cook/SKILL.md` |
+| "fix bug X" / "this is broken" / "error when..." | `.claude/skills/workflow/fix/SKILL.md` |
+| "review this code" / "is this code good?" | `.claude/skills/workflow/review/SKILL.md` |
+| "audit" / "check quality" / "health check" | `.claude/skills/quality/audit/SKILL.md` |
+| "refactor X" / "clean up X" / "this is messy" | `.claude/skills/core/refactor/SKILL.md` |
+| "add tests" / "write tests for X" | `.claude/skills/quality/test/SKILL.md` |
+| "deploy" / "ship" / "go to production" | `.claude/skills/workflow/ship/SKILL.md` |
+| "security" / "is this secure?" / "vulnerabilities" | `.claude/skills/workflow/security/SKILL.md` |
+| "setup auth" / "multi-tenant" / "RBAC" | `.claude/skills/workflow/saas-auth/SKILL.md` |
+| "payment" / "stripe" / "billing" / "subscription" | `.claude/skills/workflow/payment/SKILL.md` |
+| "map codebase" / "understand this project" | `.claude/skills/core/index/SKILL.md` |
+| "optimize" / "slow" / "performance" | `.claude/skills/quality/optimize/SKILL.md` |
+| "plan X" / "how should we architect X" | `.claude/skills/workflow/plan/SKILL.md` |
+| "commit" / "save changes" | `.claude/skills/workflow/commit/SKILL.md` |
+| "create PR" / "pull request" | `.claude/skills/workflow/pr/SKILL.md` |
+| "generate docs" / "document this" | `.claude/skills/workflow/docs/SKILL.md` |
+| "background jobs" / "queue" / "async tasks" | `.claude/skills/workflow/queue/SKILL.md` |
+| "realtime" / "websocket" / "live updates" | `.claude/skills/workflow/realtime/SKILL.md` |
+| "email" / "send notification" | `.claude/skills/workflow/email/SKILL.md` |
+| "upload" / "file storage" / "S3" / "images" | `.claude/skills/workflow/storage/SKILL.md` |
+| "cache" / "redis" / "slow queries" | `.claude/skills/workflow/cache/SKILL.md` |
+| "search" / "full-text" / "autocomplete" | `.claude/skills/workflow/search/SKILL.md` |
+| "admin panel" / "dashboard" / "CRUD" | `.claude/skills/workflow/admin/SKILL.md` |
+| "analytics" / "tracking" / "metrics" | `.claude/skills/workflow/analytics/SKILL.md` |
+| "export" / "PDF" / "CSV" / "invoice" | `.claude/skills/workflow/export/SKILL.md` |
+| "state machine" / "approval flow" / "workflow" | `.claude/skills/workflow/process/SKILL.md` |
+| "money" / "financial" / "idempotency" / "ledger" | `.claude/skills/workflow/money-safe/SKILL.md` |
+| "accessibility" / "a11y" / "WCAG" | `.claude/skills/workflow/a11y/SKILL.md` |
+| "i18n" / "translation" / "multilingual" | `.claude/skills/workflow/i18n/SKILL.md` |
+| "database migration" / "schema change" | `.claude/skills/workflow/db-migrate/SKILL.md` |
+| "UI component" / "generate component" | `.claude/skills/workflow/ui/SKILL.md` |
+| "design system" / "design tokens" / "theme" | `.claude/skills/workflow/design-system/SKILL.md` |
+
+**If the user just says "cook" or gives a vague task**, use `/cook` — it handles everything autonomously.
+
+**If no skill matches**, just help the user directly without a skill. Not everything needs a workflow.
+
 ## Philosophy
 
 1. **Evidence over claims** - Never say "done" without proof (tests pass, types check, lint clean)
@@ -31,6 +78,9 @@ CodePilot auto-detects your project stack from config files:
 | `.env*` | Environment config |
 
 ## Available Workflows (Slash Commands)
+
+### Auto-pilot
+- `/cook [task]` - One command to ship. Reads CLAUDE.md → brainstorm → plan → code → test → commit. You go get coffee.
 
 ### Development
 - `/feature <description>` - Plan, implement, test, review a feature end-to-end
