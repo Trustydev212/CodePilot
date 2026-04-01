@@ -36,7 +36,7 @@ cp .codepilot/CLAUDE.md CLAUDE.md
 
 ## What's Included
 
-### 58+ Workflow Commands (Slash Commands)
+### 59+ Workflow Commands (Slash Commands)
 
 | Command | Description |
 |---------|-------------|
@@ -76,6 +76,7 @@ cp .codepilot/CLAUDE.md CLAUDE.md
 | `/batch <operation>` | Apply changes across multiple files in parallel |
 | `/loop <type>` | Automated fix-verify cycles until all checks pass |
 | `/issue <number>` | Full issue-to-PR pipeline |
+| `/watch [options]` | Auto-monitor issues → analyze → create PRs (AI daemon) |
 | `/perf <target>` | Bundle analysis, API latency, render performance |
 | `/security` | Security scanning (deps, secrets, OWASP, headers) |
 | `/a11y` | Accessibility audit and auto-fix (WCAG 2.1 AA) |

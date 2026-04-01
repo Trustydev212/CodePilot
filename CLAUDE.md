@@ -5,7 +5,7 @@
 
 ## How It Works
 
-**You don't need to memorize 58+ commands.** Just tell Claude what you want in natural language. CodePilot auto-selects the right skill based on your request.
+**You don't need to memorize 59+ commands.** Just tell Claude what you want in natural language. CodePilot auto-selects the right skill based on your request.
 
 ### Auto-Skill Selection
 
@@ -50,6 +50,7 @@ When the user describes a task, Claude MUST automatically read and follow the mo
 | "clean up" / "dead code" / "unused imports" / "remove junk" | `.claude/skills/workflow/clean/SKILL.md` |
 | "explain this" / "how does this work" / "what does this do" | `.claude/skills/workflow/explain/SKILL.md` |
 | "health check" / "project health" / "project score" / "how healthy" | `.claude/skills/workflow/health/SKILL.md` |
+| "watch issues" / "auto PR" / "monitor repo" / "daemon" | `.claude/skills/workflow/watch/SKILL.md` |
 
 **If the user just says "cook" or gives a vague task**, use `/cook` — it handles everything autonomously.
 
@@ -121,6 +122,7 @@ CodePilot auto-detects your project stack from config files:
 - `/batch <operation>` - Apply changes across multiple files in parallel (rename, replace, transform)
 - `/loop <type>` - Automated fix-verify cycles until all quality gates pass
 - `/issue <number>` - Full issue-to-PR pipeline (read → plan → implement → test → PR)
+- `/watch [options]` - Auto-monitor GitHub issues → analyze → create PRs (AI dev team that never sleeps)
 - `/upgrade <framework>` - Guided major version upgrades with codemods and migration
 
 ### Enterprise / SaaS
