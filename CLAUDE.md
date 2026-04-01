@@ -5,7 +5,7 @@
 
 ## How It Works
 
-**You don't need to memorize 53+ commands.** Just tell Claude what you want in natural language. CodePilot auto-selects the right skill based on your request.
+**You don't need to memorize 58+ commands.** Just tell Claude what you want in natural language. CodePilot auto-selects the right skill based on your request.
 
 ### Auto-Skill Selection
 
@@ -45,6 +45,11 @@ When the user describes a task, Claude MUST automatically read and follow the mo
 | "database migration" / "schema change" | `.claude/skills/workflow/db-migrate/SKILL.md` |
 | "UI component" / "generate component" | `.claude/skills/workflow/ui/SKILL.md` |
 | "design system" / "design tokens" / "theme" | `.claude/skills/workflow/design-system/SKILL.md` |
+| "emergency fix" / "hotfix" / "production bug" / "urgent" | `.claude/skills/workflow/hotfix/SKILL.md` |
+| "onboard" / "new developer" / "getting started guide" | `.claude/skills/workflow/onboard/SKILL.md` |
+| "clean up" / "dead code" / "unused imports" / "remove junk" | `.claude/skills/workflow/clean/SKILL.md` |
+| "explain this" / "how does this work" / "what does this do" | `.claude/skills/workflow/explain/SKILL.md` |
+| "health check" / "project health" / "project score" / "how healthy" | `.claude/skills/workflow/health/SKILL.md` |
 
 **If the user just says "cook" or gives a vague task**, use `/cook` — it handles everything autonomously.
 
@@ -85,12 +90,15 @@ CodePilot auto-detects your project stack from config files:
 ### Development
 - `/feature <description>` - Plan, implement, test, review a feature end-to-end
 - `/fix <issue>` - Diagnose root cause, fix, verify, prevent regression
+- `/hotfix <issue>` - Emergency production fix (stash → fix → verify → tag → return)
 - `/refactor <target>` - Safe refactoring with evidence trail
+- `/clean [target]` - Remove dead code, unused imports, debug statements
 
 ### Quality
 - `/review` - 6-aspect parallel code review (arch, security, perf, test, quality, DX)
 - `/test <scope>` - Generate meaningful tests, not just coverage padding
 - `/audit` - Full project health check (deps, security, performance, accessibility)
+- `/health` - Project health score dashboard (deps, types, tests, build, security, git)
 
 ### Shipping
 - `/plan <goal>` - Architecture planning with trade-off analysis
@@ -107,6 +115,7 @@ CodePilot auto-detects your project stack from config files:
 - `/env` - Validate environment variables, generate .env.example, detect leaked secrets
 - `/seed` - Generate database seed data from Prisma/Drizzle schema
 - `/docs [target]` - Auto-generate API docs, component docs, architecture overviews
+- `/onboard` - Auto-generate onboarding guide for new developers
 
 ### Automation
 - `/batch <operation>` - Apply changes across multiple files in parallel (rename, replace, transform)
@@ -128,6 +137,9 @@ CodePilot auto-detects your project stack from config files:
 - `/analytics` - Product analytics (event tracking, funnels, SaaS metrics)
 - `/export` - Data export (CSV, PDF invoices, Excel, scheduled reports)
 - `/process` - Business processes (state machines, approval flows, multi-step wizards)
+
+### Understanding
+- `/explain <target>` - Deep code explanation with Mermaid diagrams (function, feature, architecture)
 
 ### Utilities
 - `/debug <symptom>` - Systematic root cause analysis
