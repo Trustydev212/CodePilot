@@ -72,7 +72,7 @@ cp .codepilot/CLAUDE.md CLAUDE.md
 | `/checkpoint save\|restore\|list` | Git checkpoints for safe experimentation |
 | `/common-ground` | Surface and validate Claude's assumptions |
 | `/mode <name>` | Switch behavioral mode (token-efficient, brainstorm, etc.) |
-| `/learn` | Analyze codebase patterns, auto-generate custom rules |
+| `/learn` | Analyze codebase patterns, auto-generate rules + templates |
 | `/batch <operation>` | Apply changes across multiple files in parallel |
 | `/loop <type>` | Automated fix-verify cycles until all checks pass |
 | `/issue <number>` | Full issue-to-PR pipeline |
@@ -126,6 +126,14 @@ cp .codepilot/CLAUDE.md CLAUDE.md
 | **quality-gate** | Auto-checks types/syntax after every file edit |
 | **auto-format** | Auto-formats files after edits (Prettier, Black, gofmt, rustfmt) |
 | **commit-guard** | Blocks commits with debug statements, conflict markers, hardcoded secrets |
+
+### Intelligence Systems
+
+| System | What It Does |
+|--------|-------------|
+| **Project Memory** (`.claude/memory/`) | Accumulates knowledge across sessions — bugs, decisions, patterns |
+| **Code Templates** (`.claude/templates/`) | Stack-aware generators from YOUR actual project patterns |
+| **Auto-Learning** (`.claude/rules/learned/`) | `/learn` scans codebase, generates rules + templates matching YOUR conventions |
 
 ### Coding Rules (Path-scoped)
 

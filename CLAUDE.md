@@ -167,6 +167,35 @@ CodePilot auto-detects your project stack from config files:
 - `/mode <name>` - Switch behavioral mode (token-efficient, brainstorm, deep-research, implementation, review, orchestration)
 - `/learn` - Analyze codebase patterns and auto-generate custom Claude rules for your project
 
+## Intelligence Systems
+
+### Project Memory (`.claude/memory/`)
+Claude accumulates knowledge about your project across sessions:
+- **bugs.md** — Bug patterns and root causes (auto-updated by `/fix`)
+- **decisions.md** — Architecture decisions and rationale (auto-updated by `/plan`)
+- **patterns.md** — Detected code patterns (auto-updated by `/learn`)
+- **stack-profile.md** — Full tech stack with versions (auto-updated by `/learn`)
+
+**How**: Skills auto-append findings. Claude reads memory before every task.
+
+### Code Templates (`.claude/templates/`)
+Stack-aware code generators from YOUR actual project patterns:
+- `api-endpoint.ts.hbs` — New API routes matching your conventions
+- `component.tsx.hbs` — New components matching your structure
+- `test.spec.ts.hbs` — New tests matching your patterns
+- `service.ts.hbs` — New services matching your architecture
+
+**How**: `/learn` scans your code and generates templates. `/cook` uses them when creating files.
+
+### Auto-Learning (`.claude/rules/learned/`)
+`/learn` analyzes your codebase and auto-generates rules:
+- Naming conventions (from actual file/variable names)
+- Architecture patterns (from actual code structure)
+- Import ordering (from actual imports)
+- Error handling (from actual try/catch patterns)
+
+**How**: Run `/learn` once. Claude follows YOUR conventions forever.
+
 ## Quality Gates (Enforced by Hooks)
 
 Every workflow enforces these gates before claiming completion:
