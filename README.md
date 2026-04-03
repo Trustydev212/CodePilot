@@ -36,7 +36,7 @@ cp .codepilot/CLAUDE.md CLAUDE.md
 
 ## What's Included
 
-### 59+ Workflow Commands (Slash Commands)
+### 62+ Workflow Commands (Slash Commands)
 
 | Command | Description |
 |---------|-------------|
@@ -72,7 +72,7 @@ cp .codepilot/CLAUDE.md CLAUDE.md
 | `/checkpoint save\|restore\|list` | Git checkpoints for safe experimentation |
 | `/common-ground` | Surface and validate Claude's assumptions |
 | `/mode <name>` | Switch behavioral mode (token-efficient, brainstorm, etc.) |
-| `/learn` | Analyze codebase patterns, auto-generate rules + templates |
+| `/learn` | Analyze codebase patterns, auto-generate custom rules |
 | `/batch <operation>` | Apply changes across multiple files in parallel |
 | `/loop <type>` | Automated fix-verify cycles until all checks pass |
 | `/issue <number>` | Full issue-to-PR pipeline |
@@ -101,6 +101,8 @@ cp .codepilot/CLAUDE.md CLAUDE.md
 | `/export` | Data export (CSV, PDF invoices, Excel, scheduled reports) |
 | `/process` | Business processes (state machines, approval flows) |
 | `/workflow` | Business process automation (state machines, approval flows, pipelines) |
+| `/self-audit` | Audit CodePilot config — hooks, rules, skills, memory health |
+| `/token-budget` | Context window analysis, waste detection, optimization plan |
 
 ### Expert Skills (Auto-activated)
 
@@ -126,6 +128,9 @@ cp .codepilot/CLAUDE.md CLAUDE.md
 | **quality-gate** | Auto-checks types/syntax after every file edit |
 | **auto-format** | Auto-formats files after edits (Prettier, Black, gofmt, rustfmt) |
 | **commit-guard** | Blocks commits with debug statements, conflict markers, hardcoded secrets |
+| **design-check** | Warns about placeholder text, missing alt, hardcoded colors, a11y issues |
+| **session-track** | Tracks files modified and commands run per session |
+| **loop-guard** | 5-layer protection against infinite loops, runaway edits, rate limiting |
 
 ### Intelligence Systems
 
@@ -133,12 +138,12 @@ cp .codepilot/CLAUDE.md CLAUDE.md
 |--------|-------------|
 | **Project Memory** (`.claude/memory/`) | Accumulates knowledge across sessions — bugs, decisions, patterns |
 | **Code Templates** (`.claude/templates/`) | Stack-aware generators from YOUR actual project patterns |
-| **Auto-Learning** (`.claude/rules/learned/`) | `/learn` scans codebase, generates rules + templates matching YOUR conventions |
+| **Auto-Learning** (`.claude/rules/learned/`) | `/learn` scans codebase, generates rules matching YOUR conventions |
 
 ### Coding Rules (Path-scoped)
 
 | Rule | Applied To |
-|------|------------|
+|------|----------|
 | **typescript** | All `.ts/.tsx` files |
 | **react** | All React components |
 | **testing** | All test files |
