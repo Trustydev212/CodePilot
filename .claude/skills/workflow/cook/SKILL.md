@@ -15,11 +15,12 @@ $ARGUMENTS
 
 ## Execution Flow
 
-### Phase 1: Understand (read CLAUDE.md)
+### Phase 1: Understand (read context)
 1. Read `CLAUDE.md` in project root — understand project purpose, stack, conventions
-2. Read the task from $ARGUMENTS
-3. If no $ARGUMENTS, read CLAUDE.md for pending tasks, TODOs, or next milestones
-4. Scan codebase structure to understand current state
+2. Read `.claude/memory/` files if they exist — recall past bugs, decisions, patterns
+3. Read the task from $ARGUMENTS
+4. If no $ARGUMENTS, read CLAUDE.md for pending tasks, TODOs, or next milestones
+5. Scan codebase structure to understand current state
 
 ### Phase 2: Brainstorm (think before coding)
 Think through:
@@ -32,11 +33,13 @@ Think through:
 Output a brief plan (5-10 lines max). Don't over-plan.
 
 ### Phase 3: Implement (write code)
-1. Follow existing code patterns and conventions from CLAUDE.md
-2. Write clean, production-ready code
-3. Keep changes minimal and focused
-4. Don't refactor unrelated code
-5. Don't add features that weren't asked for
+1. Check `.claude/templates/` for matching templates — use them as base structure
+2. Check `.claude/rules/learned/` for project conventions — follow them
+3. Follow existing code patterns and conventions from CLAUDE.md
+4. Write clean, production-ready code
+5. Keep changes minimal and focused
+6. Don't refactor unrelated code
+7. Don't add features that weren't asked for
 
 ### Phase 4: Clean (before verifying)
 Before running checks, clean up your own mess:

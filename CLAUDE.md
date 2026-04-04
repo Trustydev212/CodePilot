@@ -5,7 +5,7 @@
 
 ## How It Works
 
-**You don't need to memorize 59+ commands.** Just tell Claude what you want in natural language. CodePilot auto-selects the right skill based on your request.
+**You don't need to memorize 62+ commands.** Just tell Claude what you want in natural language. CodePilot auto-selects the right skill based on your request.
 
 ### Auto-Skill Selection
 
@@ -51,6 +51,8 @@ When the user describes a task, Claude MUST automatically read and follow the mo
 | "explain this" / "how does this work" / "what does this do" | `.claude/skills/workflow/explain/SKILL.md` |
 | "health check" / "project health" / "project score" / "how healthy" | `.claude/skills/workflow/health/SKILL.md` |
 | "watch issues" / "auto PR" / "monitor repo" / "daemon" | `.claude/skills/workflow/watch/SKILL.md` |
+| "self audit" / "check config" / "harness health" | `.claude/skills/quality/self-audit/SKILL.md` |
+| "token budget" / "context usage" / "how much context" | `.claude/skills/quality/token-budget/SKILL.md` |
 
 **If the user just says "cook" or gives a vague task**, use `/cook` — it handles everything autonomously.
 
@@ -100,6 +102,8 @@ CodePilot auto-detects your project stack from config files:
 - `/test <scope>` - Generate meaningful tests, not just coverage padding
 - `/audit` - Full project health check (deps, security, performance, accessibility)
 - `/health` - Project health score dashboard (deps, types, tests, build, security, git)
+- `/self-audit` - Audit CodePilot config itself (hooks, rules, skills, memory health)
+- `/token-budget` - Context window analysis, waste detection, optimization plan
 
 ### Shipping
 - `/plan <goal>` - Architecture planning with trade-off analysis
@@ -166,6 +170,60 @@ CodePilot auto-detects your project stack from config files:
 - `/common-ground` - Surface and validate Claude's assumptions about your project
 - `/mode <name>` - Switch behavioral mode (token-efficient, brainstorm, deep-research, implementation, review, orchestration)
 - `/learn` - Analyze codebase patterns and auto-generate custom Claude rules for your project
+
+## Intelligence Systems
+
+### Project Memory (`.claude/memory/`)
+Claude accumulates knowledge about your project across sessions:
+- **bugs.md** — Bug patterns and root causes (auto-updated by `/fix`)
+- **decisions.md** — Architecture decisions and rationale (auto-updated by `/plan`)
+- **patterns.md** — Detected code patterns (auto-updated by `/learn`)
+- **stack-profile.md** — Full tech stack with versions (auto-updated by `/learn`)
+
+**How**: Skills auto-append findings. Claude reads memory before every task.
+
+### Code Templates (`.claude/templates/`)
+Stack-aware code generators from YOUR actual project patterns:
+- `api-endpoint.ts.hbs` — New API routes matching your conventions
+- `component.tsx.hbs` — New components matching your structure
+- `test.spec.ts.hbs` — New tests matching your patterns
+- `service.ts.hbs` — New services matching your architecture
+
+**How**: `/learn` scans your code and generates templates. `/cook` uses them when creating files.
+
+### Auto-Learning (`.claude/rules/learned/`)
+`/learn` analyzes your codebase and auto-generates rules:
+- Naming conventions (from actual file/variable names)
+- Architecture patterns (from actual code structure)
+- Import ordering (from actual imports)
+- Error handling (from actual try/catch patterns)
+
+**How**: Run `/learn` once. Claude follows YOUR conventions forever.
+
+## Hook Lifecycle System
+
+CodePilot uses an event-driven hook system — not just commands, but automatic quality enforcement:
+
+### PreToolUse Hooks (Before Action)
+| Hook | Triggers On | What It Does |
+|------|------------|--------------|
+| `loop-guard.sh` | All tools | Prevents infinite loops, rate limits, runaway edits |
+| `safety-guard.sh` | Bash | Blocks 100+ dangerous commands (rm -rf, DROP TABLE, reverse shells) |
+| `commit-guard.sh` | git commit | Blocks debug stmts, conflict markers, secrets in commits |
+| `protect-secrets.sh` | Edit/Write | Prevents writing to .env, .key, .pem, .git/ files |
+
+### PostToolUse Hooks (After Action)
+| Hook | Triggers On | What It Does |
+|------|------------|--------------|
+| `quality-gate.sh` | Edit/Write | Type checks TS, syntax checks Python/JSON/YAML |
+| `auto-format.sh` | Edit/Write | Auto-runs Prettier/Biome/Black/gofmt/rustfmt |
+| `design-check.sh` | Edit/Write | Warns about placeholder text, missing alt, hardcoded colors, a11y |
+| `session-track.sh` | Bash/Edit/Write | Tracks files modified and commands run per session |
+
+### Safety Layer
+| Hook | What It Does |
+|------|--------------|
+| `loop-guard.sh` | 5-layer protection: dedup, throttle, rate limit, runaway edit detection, disk cleanup |
 
 ## Quality Gates (Enforced by Hooks)
 
